@@ -28,7 +28,7 @@ namespace seneca {
 		cin >> CONTACT->m_name;
 		cout << "Last name: " ;
 		cin >> CONTACT->m_lastname ;
-		cout << "Phone number :";
+		cout << "Phone number: ";
 		cin >> CONTACT->m_phoneNumber;
 		return CONTACT;
 	}
