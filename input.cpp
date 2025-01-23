@@ -43,7 +43,6 @@ namespace seneca {
            // flush the keyboard buffer up to 1000 characters or '\n', whichever comes first
            cin.ignore(1000, '\n');
        } while (!done);
-       cout << "> ";
        return num;
        }
 
