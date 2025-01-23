@@ -49,16 +49,20 @@ namespace seneca {
        return num;
        }
 
-   //STEP 2
+   //STEP 1 2-
    int getInt(int &number, int minVal, int maxVal) {
-       int num = 0;
+       auto num = 0;
        bool done = false;
-           cin >> num;
 
-           if (cin.fail() || num < minVal || num > maxVal) {
+       do {
+           cin >> num;
+           if (cin.fail()) {
                cout << "Bad integer entry, please try again:\n> ";
                // clear the failure status to activate cin again
                cin.clear();
+           }
+           else if (num < minVal || num > maxVal) {
+               break;
            }
            else {
                number = num;
@@ -66,6 +70,8 @@ namespace seneca {
            }
            // flush the keyboard buffer up to 1000 characters or '\n', whichever comes first
            cin.ignore(1000, '\n');
+
+       } while (!cin.fail());
        return done;
    }
 }
