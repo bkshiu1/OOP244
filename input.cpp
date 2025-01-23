@@ -71,7 +71,7 @@ namespace seneca {
            // flush the keyboard buffer up to 1000 characters or '\n', whichever comes first
            cin.ignore(1000, '\n');
 
-       } while (!cin.fail());
+       } while (!done);
        return done;
    }
 }
