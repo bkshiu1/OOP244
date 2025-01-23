@@ -33,7 +33,7 @@ namespace seneca {
 		return CONTACT;
 	}
 	void display(const Contact& C) {
-		cout << C.m_name << " " << C.m_lastname << ", +" << C.m_phoneNumber;
+		cout << C.m_name << " " << C.m_lastname << ", +" << C.m_phoneNumber << endl;
 	}
 	void deallocate(Contact* C) {
 		delete C;
