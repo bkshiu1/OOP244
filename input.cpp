@@ -31,8 +31,11 @@ namespace seneca {
        bool done = false;
        do {
            cin >> num;
-
-           if (cin.fail() || num < minVal || num > maxVal) {
+           if (cin.fail()) {
+               cout << "Bad integer entry, please try again:\n> ";
+               cin.clear();
+           }
+           else if  (num < minVal || num > maxVal) {
                 cout << "Invalid value, [" << minVal << "<ENTRY<" << maxVal << "]\n> ";
                // clear the failure status to activate cin again
                cin.clear();
