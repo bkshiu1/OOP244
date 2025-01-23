@@ -54,7 +54,7 @@ namespace seneca {
            cin >> num;
 
            if (cin.fail() || num < minVal || num > maxVal) {
-               cout << "Bad integer entry, please try again:\n>";
+               cout << "Bad integer entry, please try again:\n> ";
                // clear the failure status to activate cin again
                cin.clear();
            }
