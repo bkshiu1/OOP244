@@ -12,7 +12,7 @@ namespace seneca {
 		double* arr = new double[num];
 
 		for (int i = 0; i < num; i++) {
-			cout << "Enter the number of double values:\n> ";
+			cout << i+1 << "> ";
 			cin >> arr[i];
 		}
 
