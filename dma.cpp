@@ -7,12 +7,12 @@ namespace seneca {
 	//STEP 2
 	void reverse() {
 		int num = 0;
-		cout << "Enter number of double: ";
+		cout << "Enter the number of double values:\n> ";
 		cin >> num;
 		double* arr = new double[num];
 
 		for (int i = 0; i < num; i++) {
-			cout << "Enter the number of double values:" << endl;
+			cout << "Enter the number of double values:\n> ";
 			cin >> arr[i];
 		}
 
