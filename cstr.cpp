@@ -18,7 +18,7 @@ namespace seneca {
       while (src[len]) len++;
       return len;
    }
-   void strcpy(char* des, const char* src)
+   void strcpy(char* des, const char* src) 
    {
       unsigned int i = 0;
       while (src[i]) {
