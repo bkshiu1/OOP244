@@ -1,4 +1,4 @@
-////Karl Shiu, 131531246, bkshiu1@myseneca.ca, 29th Jan 2025
+//Carl Shiu, 127456192, bkshiu@myseneca.ca, 29th Jan 2025
 //I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments
 #include <iostream>
 #include "cstr.h"
