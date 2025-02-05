@@ -7,7 +7,6 @@ using namespace std;
 namespace seneca {
 
    const double PI = 3.14159265;
-   
 
    bool Canister::isEmpty() const {
       return m_contentVolume < 0.00001;
@@ -55,26 +54,20 @@ namespace seneca {
       return cout;
    }
    //eee
-   Canister::Canister() : m_contentName(nullptr), m_diameter(10.0), m_height(13.0), m_contentVolume(0.0) {}
+   Canister::Canister() : m_contentName(nullptr), m_diameter(10), m_height(13), m_contentVolume(0) {}
 
    // One-Argument Constructor
    Canister::Canister(const char* contentName) : Canister() {
-       if (contentName != nullptr) {
-           alocpy(m_contentName, contentName);
-       }
+       *this = Canister();
+       alocpy(m_contentName, contentName);
    }
 
    // Three-Argument Constructor
    Canister::Canister(double height, double diameter, const char* contentName) : Canister() {
-       if (height >= 10.0 && height <= 40.0 && diameter >= 10.0 && diameter <= 30.0) {
            m_height = height;
            m_diameter = diameter;
-           if (contentName != nullptr) {
-               alocpy(m_contentName, contentName);
-           }
-       }
-       else {
-           setToUnusable();
+       if (usable()) {
+           alocpy(m_contentName, contentName);
        }
    }
 
@@ -86,7 +79,6 @@ namespace seneca {
    // Clear method
    Canister& Canister::clear() {
        freeMem(m_contentName);
-       m_contentName = nullptr;
        m_contentVolume = 0.0;
        return *this;
    }
@@ -94,10 +86,10 @@ namespace seneca {
    // Set content method
    Canister& Canister::setContent(const char* contentName) {
        if (contentName != nullptr && usable()) {
-           if (isEmpty() || m_contentName == nullptr) {
+           if (m_contentName == nullptr || isEmpty()) {
                 alocpy(m_contentName, contentName);
            }
-           else if (!hasSameContent(*this)) {
+           else if (!hasSameContent(contentName)) {//do strcmp instead lol
                setToUnusable();
            }
        }
@@ -107,7 +99,7 @@ namespace seneca {
    // Pour method (by quantity)
    Canister& Canister::pour(double quantity) {
        if (usable()) {
-           if (quantity > 0 && (m_contentVolume + quantity) < capacity()) {
+           if (quantity > 0 && quantity + volume() <= capacity()) {
                m_contentVolume += quantity;
            }
            else {
