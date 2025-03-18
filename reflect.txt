@@ -1,0 +1,1 @@
+One challenge I faced was handling input buffering, which caused issues when reading user input. Fixing this helped me understand buffer clearing. Managing dynamic memory was also tricky, but I learned the importance of proper allocation and deallocation to avoid memory leaks. Overall, this workshop strengthened my understanding of C++ programming.
