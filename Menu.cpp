@@ -29,7 +29,7 @@ void MenuItem::setEmpty() {
 MenuItem::MenuItem(const char* content, unsigned indent, unsigned indentSZ, int rowNumber)
     : m_content(nullptr), m_indent(indent), m_indentSZ(indentSZ), m_rowNumber(rowNumber) {
 
-    if (!content || ut.isspace(content) || indent > 4 || indentSZ > 4 || rowNumber > MaximumNumberOfMenuItems) {
+    if (!content || ut.isspace(content) || indent > 4 || indentSZ > 4 || rowNumber > static_cast<int>(MaximumNumberOfMenuItems)) {
         setEmpty();
     }
     else {
@@ -60,7 +60,3 @@ std::ostream& MenuItem::display() const {
     }
     return std::cout;
 }
-
-
-
-
