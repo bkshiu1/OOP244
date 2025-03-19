@@ -11,8 +11,10 @@ namespace seneca {
         is.ignore(1000, '\n');
     }
     void Line::draw(std::ostream& os) const {
-        if (m_length > 0 && label()) {
+        if (label()) {
             os << label() << std::endl;
+        }
+        if (m_length > 0) {
             for (int i = 0; i < m_length; i++) os << "=";
             os << std::endl;
         }
