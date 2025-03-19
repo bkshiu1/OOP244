@@ -11,7 +11,7 @@ namespace seneca {
         is.ignore(1000, '\n');
     }
     void Line::draw(std::ostream& os) const {
-        if (label()) {
+        if (label() && label()[0] != '\0') {
             os << label() << std::endl;
         }
         if (m_length > 0) {
