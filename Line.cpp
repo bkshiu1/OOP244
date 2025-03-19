@@ -16,7 +16,6 @@ namespace seneca {
         }
         if (m_length > 0) {
             for (int i = 0; i < m_length; i++) os << "=";
-            os << std::endl;
         }
     }
 }
