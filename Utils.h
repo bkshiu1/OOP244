@@ -1,3 +1,5 @@
+//Karl Shiu, bkshiu1@myseneca.ca, 131531246
+//I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
 /***********************************************************************
 // OOP244 Project/workshop, Utils Module
 //
