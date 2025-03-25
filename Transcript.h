@@ -19,18 +19,18 @@ namespace seneca {
     class Transcript :
         public Marks {
         // character pointer student name
-        char* m_studentName;
+        char* m_name;
 
         // unsigned integer or size_t student number
-        unsigned int m_studentNumber;
+        unsigned int m_stuNum;
 
     public:
         // Constructor
-        Transcript(const char* name, unsigned int number);
+        Transcript(const char* studentName, unsigned int studentNo);
 
         // Rule of Three
-        Transcript(const Transcript& other);
-        Transcript& operator=(const Transcript& other);
+        Transcript(const Transcript& source);
+        Transcript& operator=(const Transcript& source);
 
         // Destructor
         ~Transcript();
