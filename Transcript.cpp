@@ -1,3 +1,6 @@
+//Karl Shiu, 131531246, 25/3/2025
+//I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
+
 /***********************************************************************
 // OOP244 workshop 9, Transcript module
 //
@@ -32,7 +35,7 @@ namespace seneca {
 
     Transcript& Transcript::operator=(const Transcript& source) {
         if (this != &source) {
-            Marks::operator=(source); // Base copy
+            Marks::operator=(source);
             delete[] m_name;
             m_name = nullptr;
             ut.alocpy(m_name, source.m_name);
