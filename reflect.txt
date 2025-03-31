@@ -1,0 +1,10 @@
+In Workshop 9, I learned how to manage dynamic memory in C++ and how to use inheritance between classes. The biggest focus was on using the Rule of Three: creating a copy constructor, copy assignment operator, and destructor when a class handles dynamic memory. This helped me understand how to safely copy and clean up memory to avoid leaks.
+
+I built a Transcript class that extended the Marks class. This taught me how a derived class can reuse base class functions while adding its own data. I also learned how to override a virtual function to customize how objects display information. For example, I overrode the display function in Transcript to first print the student's name and number, then call the base Marks::display() to show all their marks.
+
+The Utils module made it easier to copy and manage strings without writing extra code. I saw how utility functions make code more reusable and clean.
+
+One of the hard parts was getting the memory copying right and making sure nothing was leaking. Another tricky part was matching the output format exactly, since even small differences could make the test fail.
+
+This workshop helped me feel more comfortable working with classes, inheritance, and memory in C++. I also improved at reading and updating existing code while keeping all the structure and comments in place.
+
