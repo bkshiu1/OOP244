@@ -1,5 +1,5 @@
 //I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
-//karl shiu, 131531246, 2/4/2025
+//Carl shiu, 127456192, 2/4/2025
 #ifndef SENECA_DYNACOPY_H
 #define SENECA_DYNACOPY_H
 
