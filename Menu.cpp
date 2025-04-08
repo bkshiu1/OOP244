@@ -52,11 +52,11 @@ MenuItem::operator bool() const {
 std::ostream& MenuItem::display() const {
     if (m_content && m_content[0] != '\0' && !ut.isspace(m_content)) {
         if (m_rowNumber >= 0) {
-            std::cout << std::setw(m_indent * m_indentSZ) << "" << std::setw(2) << m_rowNumber << "- ";
+            for (unsigned i = 0; i < m_indent * m_indentSZ; ++i) std::cout.put(' ');
+            std::cout << m_rowNumber << "- ";
         }
         std::cout << m_content;
-    }
-    else {
+    } else {
         std::cout << "??????????";
     }
     return std::cout;
