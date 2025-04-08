@@ -11,7 +11,7 @@
 // Date      Reason
 // 2025/04/08  Completed Milestone 2 implementation
 // -----------------------------------------------------------
-// I have done all the coding by myself and only copied the code 
+// I have done all the coding by myself and only copied the code
 // that my professor provided to complete my workshops and assignments.
 // -----------------------------------------------------------
 ***********************************************************************/
@@ -32,7 +32,8 @@ MenuItem::MenuItem(const char* content, unsigned indent, unsigned indentSZ, int 
     : m_content(nullptr), m_indent(indent), m_indentSZ(indentSZ), m_rowNumber(rowNumber) {
     if (!content || ut.isspace(content) || indent > 4 || indentSZ > 4 || rowNumber > static_cast<int>(MaximumNumberOfMenuItems)) {
         setEmpty();
-    } else {
+    }
+    else {
         while (*content && ut.isspace(*content)) {
             content++;
         }
@@ -51,20 +52,25 @@ MenuItem::operator bool() const {
 std::ostream& MenuItem::display() const {
     if (m_content && m_content[0] != '\0' && !ut.isspace(m_content)) {
         if (m_rowNumber >= 0) {
-            std::cout << std::string(m_indent * m_indentSZ, ' ');
+            // For numbered items
             if (m_rowNumber < 10 || m_rowNumber == 0) {
-                std::cout << " " << m_rowNumber << "- ";
-            } else {
+                // 1-9 and 0 → 1 extra space for alignment
+                std::cout << std::string((m_indent * m_indentSZ) + 1, ' ');
                 std::cout << m_rowNumber << "- ";
             }
-        } else {
-            // For prompt and title without row number
-            // Prompt must always be +1 indent from title
-            std::string prefix = (std::string((m_indent * m_indentSZ), ' '));
-            std::cout << prefix;
+            else {
+                // 10-20 → no extra space
+                std::cout << std::string(m_indent * m_indentSZ, ' ');
+                std::cout << m_rowNumber << "- ";
+            }
+        }
+        else {
+            // Title or prompt (e.g., "> ")
+            std::cout << std::string(m_indent * m_indentSZ, ' ');
         }
         std::cout << m_content;
-    } else {
+    }
+    else {
         std::cout << "??????????";
     }
     return std::cout;
@@ -73,9 +79,9 @@ std::ostream& MenuItem::display() const {
 
 Menu::Menu(const char* title, const char* exitOption, unsigned indent, unsigned indentSZ)
     : m_indent(indent), m_indentSZ(indentSZ), m_numItems(0),
-      m_title(title, indent, indentSZ, -1),
-      m_exitOption(exitOption, indent, indentSZ, 0),
-      m_prompt("> ", 0, indentSZ, -1)  // FIXED: Prompt should never be indented
+    m_title(title, indent, indentSZ, -1),
+    m_exitOption(exitOption, indent, indentSZ, 0),
+    m_prompt("> ", 0, indentSZ, -1)  // FIXED: Prompt should never be indented
 {
     for (unsigned i = 0; i < MaximumNumberOfMenuItems; ++i) {
         m_items[i] = nullptr;
@@ -114,10 +120,10 @@ size_t Menu::select() const {
 }
 
 namespace seneca {
-size_t operator<<(std::ostream& ostr, const Menu& m) {
-    if (&ostr == &std::cout) {
-        return m.select();
+    size_t operator<<(std::ostream& ostr, const Menu& m) {
+        if (&ostr == &std::cout) {
+            return m.select();
+        }
+        return 0;
     }
-    return 0;
-}
 }
