@@ -23,7 +23,6 @@
 #include <cstring>
 #include <string>
 
-
 using namespace std;
 
 namespace seneca {
@@ -74,17 +73,17 @@ namespace seneca {
     }
 
     bool Food::order() {
-        Menu sizeMenu("Food Size Selection");
+        Menu sizeMenu("Food Size Selection", "Back", 2);
         sizeMenu << "Adult" << "Child";
         size_t selection = sizeMenu.select();
 
         if (selection == 1 || selection == 2) {
             m_child = (selection == 2);
             m_ordered = true;
+
             cout << "Special instructions\n> ";
             char buffer[1024]{};
-            cin.ignore(1000, '\n');
-            cin.getline(buffer, 1024);
+            cin.getline(buffer, 1024); // Removed extra cin.ignore to avoid skipping
             delete[] m_customize;
             m_customize = (*buffer) ? ut.alocpy(buffer) : nullptr;
         }
@@ -121,4 +120,4 @@ namespace seneca {
         return (m_ordered && m_child) ? Billable::price() * 0.5 : Billable::price();
     }
 
-} // namespace seneca
+}
