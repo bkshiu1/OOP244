@@ -71,7 +71,7 @@ Menu::Menu(const char* title, const char* exitOption, unsigned indent, unsigned 
     : m_indent(indent), m_indentSZ(indentSZ), m_numItems(0),
       m_title(title, indent, indentSZ, -1),
       m_exitOption(exitOption, indent, indentSZ, 0),
-      m_prompt("> ", indent + 1, indentSZ, -1) {
+      m_prompt("> ", indent, indentSZ, -1) {
     for (unsigned i = 0; i < MaximumNumberOfMenuItems; ++i) {
         m_items[i] = nullptr;
     }
@@ -86,7 +86,10 @@ Menu::~Menu() {
 
 Menu& Menu::operator<<(const char* menuItemContent) {
     if (m_numItems < MaximumNumberOfMenuItems) {
-        unsigned itemIndent = m_indent + 1;
+        unsigned itemIndent = 1;
+        if (m_title && std::strstr(m_title.m_content, "Submenu")) {
+            itemIndent = 2;
+        }
         m_items[m_numItems] = new MenuItem(menuItemContent, itemIndent, m_indentSZ, static_cast<int>(m_numItems + 1));
         m_numItems++;
     }
