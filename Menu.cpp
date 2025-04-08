@@ -3,7 +3,7 @@
 //
 // Final Project Milestone 2
 // Module: Menu
-// Filename: Menu.cpp
+// Filename: Menu.cpp / Menu.h
 // Version 1.0
 // Author: Karl Shiu, 131531246, bkshiu1@myseneca.ca
 // Revision History
@@ -55,7 +55,8 @@ std::ostream& MenuItem::display() const {
             std::cout << " " << m_rowNumber << "- ";
         }
         std::cout << m_content;
-    } else {
+    }
+    else {
         std::cout << "??????????";
     }
     return std::cout;
@@ -87,7 +88,7 @@ Menu& Menu::operator<<(const char* menuItemContent) {
 }
 
 size_t Menu::select() const {
-    if (m_title) m_title.display() << std::endl;
+    if (m_title) std::cout << std::string(m_indent * m_indentSZ, ' '), m_title.display() << std::endl;
 
     for (unsigned i = 0; i < m_numItems; ++i) {
         if (m_items[i]) {
