@@ -3,7 +3,7 @@
 //
 // Final Project Milestone 2
 // Module: Menu
-// Filename: Menu.cpp / Menu.h
+// Filename: Menu.cpp
 // Version 1.0
 // Author: Karl Shiu, 131531246, bkshiu1@myseneca.ca
 // Revision History
@@ -89,8 +89,7 @@ Menu::~Menu() {
 
 Menu& Menu::operator<<(const char* menuItemContent) {
     if (m_numItems < MaximumNumberOfMenuItems) {
-        unsigned itemIndent = m_indent;
-        m_items[m_numItems] = new MenuItem(menuItemContent, itemIndent, m_indentSZ, static_cast<int>(m_numItems + 1));
+        m_items[m_numItems] = new MenuItem(menuItemContent, m_indent + 1, m_indentSZ, static_cast<int>(m_numItems + 1));
         m_numItems++;
     }
     return *this;
@@ -115,10 +114,19 @@ size_t Menu::run() const {
     return select();
 }
 
+void Menu::displayOnly() const {
+    if (m_title) m_title.display() << std::endl;
+    for (unsigned i = 0; i < m_numItems; ++i) {
+        if (m_items[i]) {
+            m_items[i]->display() << std::endl;
+        }
+    }
+}
+
 namespace seneca {
     size_t operator<<(std::ostream& ostr, const Menu& m) {
         if (&ostr == &std::cout) {
-            return m.select();
+            return m.run();
         }
         return 0;
     }

@@ -66,6 +66,7 @@ namespace seneca {
         Menu& operator<<(const char* menuItemContent);
         size_t select() const;
         size_t run() const;
+        void displayOnly() const;
 
         friend size_t operator<<(std::ostream& ostr, const Menu& m);
     };
