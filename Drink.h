@@ -20,12 +20,11 @@
 #define SENECA_DRINK_H
 
 #include "Billable.h"
-#include <iostream>
-#include <fstream>
 
 namespace seneca {
+
     class Drink : public Billable {
-        char m_size;
+        char m_size{};
 
     public:
         Drink();
@@ -35,6 +34,7 @@ namespace seneca {
         std::ifstream& read(std::ifstream& file) override;
         double price() const override;
     };
+
 }
 
-#endif // SENECA_DRINK_H
+#endif

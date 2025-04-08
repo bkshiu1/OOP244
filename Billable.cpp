@@ -15,23 +15,26 @@
 // that my professor provided to complete my workshops and assignments.
 // -----------------------------------------------------------
 ***********************************************************************/
-#define _CRT_SECURE_NO_WARNINGS
 #include "Billable.h"
+#include "Utils.h"
 #include <cstring>
+#include <iostream>
+
+using namespace std;
 
 namespace seneca {
 
     Billable::Billable() : m_name(nullptr), m_price(0.0) {}
 
-    Billable::Billable(const Billable& src) {
-        m_name = nullptr;
-        *this = src;
+    Billable::Billable(const Billable& other) {
+        *this = other;
     }
 
-    Billable& Billable::operator=(const Billable& src) {
-        if (this != &src) {
-            name(src.m_name);
-            m_price = src.m_price;
+    Billable& Billable::operator=(const Billable& other) {
+        if (this != &other) {
+            delete[] m_name;
+            m_name = ut.alocpy(other.m_name);
+            m_price = other.m_price;
         }
         return *this;
     }
@@ -40,19 +43,13 @@ namespace seneca {
         delete[] m_name;
     }
 
-    void Billable::name(const char* name) {
-        delete[] m_name;
-        if (name && name[0] != '\0') {
-            m_name = new char[strlen(name) + 1];
-            std::strcpy(m_name, name);
-        }
-        else {
-            m_name = nullptr;
-        }
-    }
-
     void Billable::price(double value) {
         m_price = value;
+    }
+
+    void Billable::name(const char* name) {
+        delete[] m_name;
+        m_name = ut.alocpy(name);
     }
 
     double Billable::price() const {
@@ -64,11 +61,12 @@ namespace seneca {
     }
 
     double operator+(double money, const Billable& B) {
-        return money + B.price();
+        if (B.ordered()) money += B.price();
+        return money;
     }
 
     double& operator+=(double& money, const Billable& B) {
-        return money += B.price();
+        if (B.ordered()) money += B.price();
+        return money;
     }
-
-} // namespace seneca
+}

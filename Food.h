@@ -15,12 +15,13 @@
 // that my professor provided to complete my workshops and assignments.
 // -----------------------------------------------------------
 ***********************************************************************/
+
 #ifndef SENECA_FOOD_H
 #define SENECA_FOOD_H
 
-#include "Billable.h"
-#include <fstream>
 #include <iostream>
+#include <fstream>
+#include "Billable.h"
 
 namespace seneca {
 
@@ -28,6 +29,7 @@ namespace seneca {
         bool m_ordered{};
         bool m_child{};
         char* m_customize{};
+
     public:
         Food();
         Food(const Food& src);
@@ -41,6 +43,6 @@ namespace seneca {
         double price() const override;
     };
 
-}
+} // namespace seneca
 
 #endif // SENECA_FOOD_H
