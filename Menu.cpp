@@ -51,7 +51,12 @@ MenuItem::operator bool() const {
 std::ostream& MenuItem::display() const {
     if (m_content && m_content[0] != '\0' && !ut.isspace(m_content)) {
         if (m_rowNumber >= 0) {
-            std::cout << " " << m_rowNumber << "- ";
+            std::cout << std::string(m_indent * m_indentSZ, ' ');
+            if (m_rowNumber < 10) {
+                std::cout << " " << m_rowNumber << "- ";
+            } else {
+                std::cout << m_rowNumber << "- ";
+            }
         }
         std::cout << m_content;
     } else {
@@ -59,6 +64,7 @@ std::ostream& MenuItem::display() const {
     }
     return std::cout;
 }
+
 
 Menu::Menu(const char* title, const char* exitOption, unsigned indent, unsigned indentSZ)
     : m_indent(indent), m_indentSZ(indentSZ), m_numItems(0),
