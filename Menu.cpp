@@ -54,11 +54,7 @@ std::ostream& MenuItem::display() const {
         if (m_rowNumber >= 0) {
             unsigned indentSpaces = (m_indent == 0) ? 0 : m_indent * m_indentSZ;
             std::cout << std::string(indentSpaces, ' ');
-            if (m_rowNumber < 10) {
-                std::cout << " " << m_rowNumber << "- ";
-            } else {
-                std::cout << m_rowNumber << "- ";
-            }
+            std::cout << m_rowNumber << "- ";
         }
         std::cout << m_content;
     } else {
@@ -66,6 +62,7 @@ std::ostream& MenuItem::display() const {
     }
     return std::cout;
 }
+
 
 
 
