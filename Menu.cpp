@@ -54,7 +54,7 @@ std::ostream& MenuItem::display() const {
         if (m_rowNumber >= 0) {
             int indent = m_indent * m_indentSZ;
             if (m_rowNumber < 10 || m_rowNumber == 0) {
-                indent += 1; // Align single digits and 0- with double digits
+                indent += 1;
             }
             std::cout << std::string(indent, ' ') << m_rowNumber << "- ";
         } else {
@@ -86,13 +86,12 @@ Menu::~Menu() {
 
 Menu& Menu::operator<<(const char* menuItemContent) {
     if (m_numItems < MaximumNumberOfMenuItems) {
-        unsigned itemIndent = 1; // FIXED: all top-level options have indent level 1
+        unsigned itemIndent = (m_indent == 0) ? 0 : 1;
         m_items[m_numItems] = new MenuItem(menuItemContent, itemIndent, m_indentSZ, static_cast<int>(m_numItems + 1));
         m_numItems++;
     }
     return *this;
 }
-
 
 size_t Menu::select() const {
     if (m_title) m_title.display() << std::endl;
