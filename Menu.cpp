@@ -86,7 +86,7 @@ Menu::~Menu() {
 
 Menu& Menu::operator<<(const char* menuItemContent) {
     if (m_numItems < MaximumNumberOfMenuItems) {
-        unsigned itemIndent = m_indent + 1;
+        unsigned itemIndent = m_indent;
         m_items[m_numItems] = new MenuItem(menuItemContent, itemIndent, m_indentSZ, static_cast<int>(m_numItems + 1));
         m_numItems++;
     }
