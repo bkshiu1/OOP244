@@ -52,13 +52,16 @@ std::ostream& MenuItem::display() const {
     if (m_content && m_content[0] != '\0' && !ut.isspace(m_content)) {
         if (m_rowNumber >= 0) {
             std::cout << std::string(m_indent * m_indentSZ, ' ');
-            if (m_rowNumber < 10) {
+            if (m_rowNumber < 10 || m_rowNumber == 0) {
                 std::cout << " " << m_rowNumber << "- ";
             } else {
                 std::cout << m_rowNumber << "- ";
             }
         } else {
-            std::cout << std::string(m_indent * m_indentSZ, ' ');
+            // For prompt and title without row number
+            // Prompt must always be +1 indent from title
+            std::string prefix = (std::string((m_indent * m_indentSZ), ' '));
+            std::cout << prefix;
         }
         std::cout << m_content;
     } else {
@@ -66,6 +69,7 @@ std::ostream& MenuItem::display() const {
     }
     return std::cout;
 }
+
 
 Menu::Menu(const char* title, const char* exitOption, unsigned indent, unsigned indentSZ)
     : m_indent(indent), m_indentSZ(indentSZ), m_numItems(0),
