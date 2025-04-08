@@ -86,15 +86,12 @@ Menu::~Menu() {
 
 Menu& Menu::operator<<(const char* menuItemContent) {
     if (m_numItems < MaximumNumberOfMenuItems) {
-        unsigned itemIndent = (m_title && std::strstr(m_title.m_content, "Submenu"))
-                                ? m_indent
-                                : (m_indent == 0 ? 0 : 1);
+        unsigned itemIndent = m_indent + 1;
         m_items[m_numItems] = new MenuItem(menuItemContent, itemIndent, m_indentSZ, static_cast<int>(m_numItems + 1));
         m_numItems++;
     }
     return *this;
 }
-
 
 size_t Menu::select() const {
     if (m_title) m_title.display() << std::endl;
