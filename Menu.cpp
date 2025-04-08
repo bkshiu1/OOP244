@@ -71,7 +71,7 @@ Menu::Menu(const char* title, const char* exitOption, unsigned indent, unsigned 
     : m_indent(indent), m_indentSZ(indentSZ), m_numItems(0),
       m_title(title, indent, indentSZ, -1),
       m_exitOption(exitOption, indent, indentSZ, 0),
-      m_prompt("> ", indent + 1, indentSZ, -1) {
+      m_prompt("> ", indent, indentSZ, -1) { // FIXED: align prompt with title
     for (unsigned i = 0; i < MaximumNumberOfMenuItems; ++i) {
         m_items[i] = nullptr;
     }
