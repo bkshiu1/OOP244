@@ -77,7 +77,7 @@ namespace seneca {
         if (getline(file, name, ',') && file >> price) {
             file.ignore(1000, '\n');
             this->name(name.c_str());
-            this->price(price);
+            this->Billable::price(price);
             m_size = '\0';
         }
         return file;
