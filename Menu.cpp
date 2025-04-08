@@ -52,7 +52,12 @@ MenuItem::operator bool() const {
 std::ostream& MenuItem::display() const {
     if (m_content && m_content[0] != '\0' && !ut.isspace(m_content)) {
         if (m_rowNumber >= 0) {
-            std::cout << " " << m_rowNumber << "- ";
+            if (m_rowNumber < 10) {
+                std::cout << "    " << m_rowNumber << "- ";
+            }
+            else {
+                std::cout << "   " << m_rowNumber << "- ";
+            }
         }
         std::cout << m_content;
     }
