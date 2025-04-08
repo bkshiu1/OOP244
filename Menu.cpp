@@ -56,6 +56,7 @@ std::ostream& MenuItem::display() const {
             } else {
                 std::cout << std::string(m_indent * m_indentSZ, ' ');
             }
+
             if (m_rowNumber < 10) {
                 std::cout << " " << m_rowNumber << "- ";
             } else {
@@ -68,6 +69,7 @@ std::ostream& MenuItem::display() const {
     }
     return std::cout;
 }
+
 
 
 
