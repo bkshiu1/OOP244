@@ -1,0 +1,8 @@
+I learned how to use function templates to make flexible and reusable code. Function templates let us write one version of a function that works for many data types, like int and custom classes like Name. I created two versions of a function called dynaCopy. The first version makes a new dynamic array and copies elements into it. The second version replaces an existing dynamic array with a new one and copies elements into it.
+
+I also made a function called prnArray that prints elements of any type in a line, separated by commas. This helped me see how useful templates can be when you want to avoid repeating similar code.
+
+One challenge I had was remembering to delete the old dynamic memory before creating new memory. If you forget, it can cause a memory leak. For example, in the three-argument dynaCopy, I had to write delete[] destinationArray; before assigning new memory. Another issue was understanding template error messages, which can be long and hard to read.
+
+Overall, I now feel more confident using templates and working with dynamic memory in C++. This workshop gave me good practice with copying arrays safely and writing code that works for different data types.
+
