@@ -5,13 +5,13 @@
 // Module: Menu
 // Filename: Menu.cpp / Menu.h
 // Version 1.0
-// Author: Yat Hei Lam, StNo: 123456789, Email: ylam1@myseneca.ca
+// Author: Karl Shiu, 131531246, bkshiu1@myseneca.ca
 // Revision History
 // -----------------------------------------------------------
 // Date      Reason
 // 2025/04/08  Completed Milestone 2 implementation
 // -----------------------------------------------------------
-// I have done all the coding by myself and only copied the code
+// I have done all the coding by myself and only copied the code 
 // that my professor provided to complete my workshops and assignments.
 // -----------------------------------------------------------
 ***********************************************************************/
@@ -32,8 +32,7 @@ MenuItem::MenuItem(const char* content, unsigned indent, unsigned indentSZ, int 
     : m_content(nullptr), m_indent(indent), m_indentSZ(indentSZ), m_rowNumber(rowNumber) {
     if (!content || ut.isspace(content) || indent > 4 || indentSZ > 4 || rowNumber > static_cast<int>(MaximumNumberOfMenuItems)) {
         setEmpty();
-    }
-    else {
+    } else {
         while (*content && ut.isspace(*content)) {
             content++;
         }
@@ -52,17 +51,14 @@ MenuItem::operator bool() const {
 std::ostream& MenuItem::display() const {
     if (m_content && m_content[0] != '\0' && !ut.isspace(m_content)) {
         if (m_rowNumber >= 0) {
-            if (m_indent == 0) {
-                std::cout << " ";
-            } else {
-                std::cout << std::string(m_indent * m_indentSZ, ' ');
-            }
-
+            std::cout << std::string(m_indent * m_indentSZ, ' ');
             if (m_rowNumber < 10) {
                 std::cout << " " << m_rowNumber << "- ";
             } else {
                 std::cout << m_rowNumber << "- ";
             }
+        } else {
+            std::cout << std::string((m_indent == 0 ? 1 : m_indent * m_indentSZ), ' ');
         }
         std::cout << m_content;
     } else {
@@ -71,15 +67,11 @@ std::ostream& MenuItem::display() const {
     return std::cout;
 }
 
-
-
-
-
 Menu::Menu(const char* title, const char* exitOption, unsigned indent, unsigned indentSZ)
     : m_indent(indent), m_indentSZ(indentSZ), m_numItems(0),
-    m_title(title, indent, indentSZ, -1),
-    m_exitOption(exitOption, indent, indentSZ, 0),
-    m_prompt("> ", indent + 1, indentSZ, -1) {
+      m_title(title, indent, indentSZ, -1),
+      m_exitOption(exitOption, indent, indentSZ, 0),
+      m_prompt("> ", indent + 1, indentSZ, -1) {
     for (unsigned i = 0; i < MaximumNumberOfMenuItems; ++i) {
         m_items[i] = nullptr;
     }
@@ -102,7 +94,7 @@ Menu& Menu::operator<<(const char* menuItemContent) {
 }
 
 size_t Menu::select() const {
-    if (m_title) std::cout << std::string(m_indent * m_indentSZ, ' '), m_title.display() << std::endl;
+    if (m_title) m_title.display() << std::endl;
 
     for (unsigned i = 0; i < m_numItems; ++i) {
         if (m_items[i]) {
@@ -117,10 +109,10 @@ size_t Menu::select() const {
 }
 
 namespace seneca {
-    size_t operator<<(std::ostream& ostr, const Menu& m) {
-        if (&ostr == &std::cout) {
-            return m.select();
-        }
-        return 0;
+size_t operator<<(std::ostream& ostr, const Menu& m) {
+    if (&ostr == &std::cout) {
+        return m.select();
     }
+    return 0;
+}
 }
