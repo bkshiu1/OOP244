@@ -73,7 +73,7 @@ namespace seneca {
     }
 
     bool Food::order() {
-        Menu sizeMenu("Food Size Selection", "Back", 2, 4);
+        Menu sizeMenu("Food Size Selection", "Back", 2, 5);
         sizeMenu << "Adult" << "Child";
         size_t selection = sizeMenu.select();
 
@@ -81,11 +81,10 @@ namespace seneca {
             m_child = (selection == 2);
             m_ordered = true;
             cout << "Special instructions\n> ";
-            string buffer;
-            cin.ignore();
-            getline(cin, buffer);
+            char buffer[1024]{};
+            cin.getline(buffer, 1024);  // FIX: Removed cin.ignore()
             delete[] m_customize;
-            m_customize = (!buffer.empty()) ? ut.alocpy(buffer.c_str()) : nullptr;
+            m_customize = (*buffer) ? ut.alocpy(buffer) : nullptr;
         }
         else {
             m_ordered = false;
