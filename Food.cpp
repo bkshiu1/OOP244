@@ -1,131 +1,122 @@
 /***********************************************************************
-// OOP244 Project, Menu Module
+// OOP244 Project, Food Module
 //
-// Final Project Milestone 2
-// Module: Menu
-// Filename: Menu.cpp / Menu.h
+// Final Project Milestone 3
+// Module: Food
+// Filename: Food.cpp
 // Version 1.0
 // Author: Karl Shiu, 131531246, bkshiu1@myseneca.ca
 // Revision History
 // -----------------------------------------------------------
 // Date      Reason
-// 2025/04/08  Completed Milestone 2 implementation
+// 2025/04/08  Implemented Food module logic
 // -----------------------------------------------------------
 // I have done all the coding by myself and only copied the code
 // that my professor provided to complete my workshops and assignments.
 // -----------------------------------------------------------
 ***********************************************************************/
+
+#include "Food.h"
+#include "Utils.h"
 #include "Menu.h"
 #include <iomanip>
 #include <cstring>
+#include <string>
 
-using namespace seneca;
-
-void MenuItem::setEmpty() {
-    delete[] m_content;
-    m_content = nullptr;
-    m_indent = 0;
-    m_indentSZ = 0;
-    m_rowNumber = -1;
-}
-
-MenuItem::MenuItem(const char* content, unsigned indent, unsigned indentSZ, int rowNumber)
-    : m_content(nullptr), m_indent(indent), m_indentSZ(indentSZ), m_rowNumber(rowNumber) {
-    if (!content || ut.isspace(content) || indent > 4 || indentSZ > 4 || rowNumber > static_cast<int>(MaximumNumberOfMenuItems)) {
-        setEmpty();
-    }
-    else {
-        while (*content && ut.isspace(*content)) {
-            content++;
-        }
-        m_content = ut.alocpy(content);
-    }
-}
-
-MenuItem::~MenuItem() {
-    delete[] m_content;
-}
-
-MenuItem::operator bool() const {
-    return m_content != nullptr && m_content[0] != '\0' && !ut.isspace(m_content);
-}
-
-std::ostream& MenuItem::display() const {
-    if (m_content && m_content[0] != '\0' && !ut.isspace(m_content)) {
-        if (m_rowNumber >= 0) {
-            int indent = m_indent * m_indentSZ;
-            if (m_rowNumber < 10 || m_rowNumber == 0) {
-                indent += 1;
-            }
-            std::cout << std::string(indent, ' ') << m_rowNumber << "- ";
-        }
-        else {
-            std::cout << std::string(m_indent * m_indentSZ, ' ');
-        }
-        std::cout << m_content;
-    }
-    else {
-        std::cout << "??????????";
-    }
-    return std::cout;
-}
-
-Menu::Menu(const char* title, const char* exitOption, unsigned indent, unsigned indentSZ)
-    : m_indent(indent), m_indentSZ(indentSZ), m_numItems(0),
-    m_title(title, indent, indentSZ, -1),
-    m_exitOption(exitOption, indent, indentSZ, 0),
-    m_prompt("> ", indent, indentSZ, -1) {
-    for (unsigned i = 0; i < MaximumNumberOfMenuItems; ++i) {
-        m_items[i] = nullptr;
-    }
-}
-
-Menu::~Menu() {
-    for (unsigned i = 0; i < m_numItems; ++i) {
-        delete m_items[i];
-        m_items[i] = nullptr;
-    }
-}
-
-Menu& Menu::operator<<(const char* menuItemContent) {
-    if (m_numItems < MaximumNumberOfMenuItems) {
-        unsigned itemIndent = m_indent + 1;
-        m_items[m_numItems] = new MenuItem(menuItemContent, itemIndent, m_indentSZ, static_cast<int>(m_numItems + 1));
-        m_numItems++;
-    }
-    return *this;
-}
-
-size_t Menu::select() const {
-    if (m_title) {
-        std::cout << std::string((m_indent + 1) * m_indentSZ, ' ');
-        m_title.display();
-        std::cout << std::endl;
-    }
-
-    for (unsigned i = 0; i < m_numItems; ++i) {
-        if (m_items[i]) {
-            m_items[i]->display();
-            std::cout << std::endl;
-        }
-    }
-
-    if (m_exitOption) {
-        m_exitOption.display();
-        std::cout << std::endl;
-    }
-
-    std::cout << std::string((m_indent + 1) * m_indentSZ, ' ');
-    m_prompt.display();
-
-    return static_cast<size_t>(ut.getInt(0, static_cast<int>(m_numItems)));
-}
+using namespace std;
 
 namespace seneca {
-    size_t operator<<(std::ostream& ostr, const Menu& m) {
-        if (&ostr == &std::cout) {
-            return m.select();
-        }
-        return 0;
+
+    Food::Food() = default;
+
+    Food::Food(const Food& src) {
+        *this = src;
     }
-}
+
+    Food& Food::operator=(const Food& src) {
+        if (this != &src) {
+            Billable::operator=(src);
+            m_ordered = src.m_ordered;
+            m_child = src.m_child;
+            delete[] m_customize;
+            if (src.m_customize) {
+                m_customize = ut.alocpy(src.m_customize);
+            }
+            else {
+                m_customize = nullptr;
+            }
+        }
+        return *this;
+    }
+
+    Food::~Food() {
+        delete[] m_customize;
+    }
+
+    ostream& Food::print(ostream& ostr) const {
+        ostr << left << setw(28) << setfill('.') << (const char*)(*this);
+
+        if (!ordered()) {
+            ostr << ".....";
+        }
+        else {
+            ostr << (m_child ? "Child" : "Adult");
+        }
+
+        ostr << right << setw(7) << setfill(' ') << fixed << setprecision(2) << price();
+
+        if (ostr.rdbuf() == cout.rdbuf() && m_customize && *m_customize) {
+            ostr << " >> ";
+            for (int i = 0; m_customize[i] && i < 30; i++) ostr << m_customize[i];
+        }
+        return ostr;
+    }
+
+    bool Food::order() {
+        Menu sizeMenu("Food Size Selection", "Back", 2, 5);
+        sizeMenu << "Adult" << "Child";
+        size_t selection = sizeMenu.select();
+
+        if (selection == 1 || selection == 2) {
+            m_child = (selection == 2);
+            m_ordered = true;
+            cout << "Special instructions\n> ";
+            char buffer[1024]{};
+            cin.getline(buffer, 1024);  // FIX: Removed cin.ignore()
+            delete[] m_customize;
+            m_customize = (*buffer) ? ut.alocpy(buffer) : nullptr;
+        }
+        else {
+            m_ordered = false;
+            m_child = false;
+            delete[] m_customize;
+            m_customize = nullptr;
+        }
+        return m_ordered;
+    }
+
+    bool Food::ordered() const {
+        return m_ordered;
+    }
+
+    ifstream& Food::read(ifstream& file) {
+        string name;
+        double pr = 0.0;
+
+        if (getline(file, name, ',') && file >> pr) {
+            file.ignore(1000, '\n');
+            this->name(name.c_str());
+            this->Billable::price(pr);
+            m_child = false;
+            m_ordered = false;
+            delete[] m_customize;
+            m_customize = nullptr;
+        }
+        return file;
+    }
+
+    double Food::price() const {
+        return (m_ordered && m_child) ? Billable::price() * 0.5 : Billable::price();
+    }
+
+} // namespace seneca
