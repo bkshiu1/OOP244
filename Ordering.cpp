@@ -121,7 +121,7 @@ namespace seneca {
     void Ordering::orderFood() {
         Menu foodMenu("Food Menu", "Back to Order", 2, 2);
         for (size_t i = 0; i < m_cntFoods; ++i) {
-            foodMenu << m_foods[i];
+            foodMenu << (const char*)m_foods[i];
 
             size_t sel = foodMenu.select();
             if (sel > 0 && m_cntItems < MaximumNumberOfBillItems) {
