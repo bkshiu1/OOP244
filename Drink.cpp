@@ -84,7 +84,7 @@ namespace seneca {
 
         if (getline(file, name, ',') && file >> price) {
             file.ignore(1000, '\n');
-            this->setName(name.c_str());
+            setName(name.c_str());  // <-- Make sure this sets the Billable name
             setPrice(price);
             m_size = '\0';
         }

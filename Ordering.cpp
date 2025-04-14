@@ -29,6 +29,8 @@ namespace seneca {
         ifstream dfile(drinkFile);
         ifstream ffile(foodFile);
 
+        if (!dfile || !ffile) return;
+
         size_t dcount = countRecords(drinkFile);
         size_t fcount = countRecords(foodFile);
 
@@ -38,7 +40,7 @@ namespace seneca {
         m_cntDrinks = 0;
         m_cntFoods = 0;
 
-        if (m_drinks && m_foods && dfile && ffile) {
+        if (m_drinks && m_foods) {
             for (size_t i = 0; i < dcount && dfile; ++i) {
                 if (m_drinks[i].read(dfile)) {
                     m_cntDrinks++;
@@ -50,15 +52,15 @@ namespace seneca {
                     m_cntFoods++;
                 }
             }
-        }
 
-        if (m_cntDrinks != dcount || m_cntFoods != fcount) {
-            delete[] m_drinks;
-            delete[] m_foods;
-            m_drinks = nullptr;
-            m_foods = nullptr;
-            m_cntDrinks = 0;
-            m_cntFoods = 0;
+            if (m_cntDrinks != dcount || m_cntFoods != fcount) {
+                delete[] m_drinks;
+                delete[] m_foods;
+                m_drinks = nullptr;
+                m_foods = nullptr;
+                m_cntDrinks = 0;
+                m_cntFoods = 0;
+            }
         }
     }
 
@@ -103,7 +105,7 @@ namespace seneca {
     void Ordering::orderDrink() {
         Menu drinkMenu("Drink Menu", "Back to Order", 2, 2);
         for (size_t i = 0; i < m_cntDrinks; ++i) {
-            drinkMenu << (const char*)m_foods[i];
+            drinkMenu << (const char*)m_drinks[i];
         }
 
         size_t sel = drinkMenu.select();
@@ -122,16 +124,16 @@ namespace seneca {
         Menu foodMenu("Food Menu", "Back to Order", 2, 2);
         for (size_t i = 0; i < m_cntFoods; ++i) {
             foodMenu << (const char*)m_foods[i];
+        }
 
-            size_t sel = foodMenu.select();
-            if (sel > 0 && m_cntItems < MaximumNumberOfBillItems) {
-                Food* f = dynamic_cast<Food*>(m_foods[sel - 1].clone());
-                if (f->order()) {
-                    m_items[m_cntItems++] = f;
-                }
-                else {
-                    delete f;
-                }
+        size_t sel = foodMenu.select();
+        if (sel > 0 && m_cntItems < MaximumNumberOfBillItems) {
+            Food* f = dynamic_cast<Food*>(m_foods[sel - 1].clone());
+            if (f->order()) {
+                m_items[m_cntItems++] = f;
+            }
+            else {
+                delete f;
             }
         }
     }
