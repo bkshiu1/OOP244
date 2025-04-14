@@ -18,6 +18,8 @@
 ***********************************************************************/
 #ifndef SENECA_UTILS_H
 #define SENECA_UTILS_H
+#include <cstddef>
+
 
 namespace seneca {
     class Utils {

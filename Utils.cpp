@@ -21,6 +21,7 @@
 #include <cctype>
 #include <cstring>
 #include <iostream>
+#include <limits>
 using namespace std;
 
 namespace seneca {
@@ -45,11 +46,13 @@ namespace seneca {
             cin >> value;
             if (cin.fail() || value < min || value > max) {
                 cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
                 cout << "Invalid value, try again: ";
             }
             else {
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
                 done = true;
             }
         }
@@ -70,7 +73,8 @@ namespace seneca {
         cin.getline(buffer, length);
         if (cin.fail()) {
             cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
             buffer[0] = '\0';
         }
     }
