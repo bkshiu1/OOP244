@@ -153,11 +153,16 @@ void Ordering::listDrinks() const {
     void Ordering::printTotals(ostream& os, double total) const {
         double tax = total * Tax;
         double totalWithTax = total + tax;
-        os << right << setw(26)  << setfill(' ')<< "Total:" << setw(10) << fixed << setprecision(2) << total << endl;
-        os << right << setw(26) << "Tax:" << setw(10) << tax << endl;
-        os << right << setw(26) << "Total+Tax:" << setw(10) << totalWithTax << endl;
-        os << "========================================" << endl;
+
+        os << "                     Total:" << "        " << total << std::endl;
+        os << "                     Tax:" << "           " << tax << std::endl;
+        os << "                     Total+Tax:" << "    " << totalWithTax << std::endl;
+        os << "========================================" << std::endl;
     }
+
+
+
+
 
     void Ordering::printBill(ostream& os) const {
         double total = 0.0;
