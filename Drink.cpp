@@ -93,13 +93,15 @@ namespace seneca {
     }
 
     double Drink::price() const {
-        double mult = (m_size == 1) ? 0.5 :
-            (m_size == 2) ? 0.75 :
-            (m_size == 3) ? 1.0 :
-            (m_size == 4) ? 1.5 : 0.0;
-        return getBasePrice() * mult;
+        double multiplier = 0.0;
+        switch (m_size) {
+        case 'S': multiplier = 0.5; break;
+        case 'M': multiplier = 0.75; break;
+        case 'L': multiplier = 1.0; break;
+        case 'X': multiplier = 1.5; break;
+        }
+        return getBasePrice() * multiplier;
     }
-
 
 
     Billable* Drink::clone() const {
