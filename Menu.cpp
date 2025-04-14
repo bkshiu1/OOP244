@@ -67,6 +67,12 @@ std::ostream& MenuItem::display() const {
     return std::cout;
 }
 
+Menu foodMenu("Food Menu", "Back to Order", 2, 3);               // 6 spaces
+Menu foodsizeMenu("Food Size Selection", "Back", 3, 3);              // 9 spaces
+Menu drinkMenu("Drink Menu", "Back to Order", 2, 3);             // 6 spaces
+Menu drinksizeMenu("Drink Size Selection", "Back", 3, 3);             // 9 spaces
+
+
 Menu::Menu(const char* title, const char* exitOption, unsigned indent, unsigned indentSZ)
     : m_indent(indent), m_indentSZ(indentSZ), m_numItems(0),
     m_title(title, indent, indentSZ, -1),

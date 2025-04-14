@@ -68,8 +68,10 @@ namespace seneca {
     }
 
     bool Food::order() {
-        Menu sizeMenu("Food Size Selection");
+        // Ensure correct indentation for "Food Size Selection"
+        Menu sizeMenu("Food Size Selection", "Back", 3, 3);
         sizeMenu << "Adult" << "Child";
+
         int sel = sizeMenu.select();
 
         if (sel == 1 || sel == 2) {
@@ -90,6 +92,7 @@ namespace seneca {
         }
         return m_ordered;
     }
+
 
     bool Food::ordered() const {
         return m_ordered;

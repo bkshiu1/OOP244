@@ -95,21 +95,21 @@ namespace seneca {
     }
 
 
-    void Ordering::listDrinks() const {
-        cout << "List Of Avaiable Drinks" << endl;
-        cout << "========================================" << endl;
-        for (size_t i = 0; i < m_cntDrinks; ++i) {
-            cout << left << setw(33) << setfill('.') << (const char*)m_drinks[i];
-            cout << right << setw(7) << setfill(' ') << fixed << setprecision(2)
-                << m_drinks[i].getBasePrice() << endl;
-        }
-        cout << "========================================" << endl;
+void Ordering::listDrinks() const {
+    cout << "List Of Avaiable Drinks" << endl;
+    cout << "========================================" << endl;
+    for (size_t i = 0; i < m_cntDrinks; ++i) {
+        cout << left << setw(33) << setfill('.') << (const char*)m_drinks[i];
+        cout << right << setw(7) << setfill(' ') << fixed << setprecision(2)
+             << m_drinks[i].getBasePrice() << endl;
     }
+    cout << "========================================" << endl;
+}
 
 
 
     void Ordering::orderDrink() {
-        Menu drinkMenu("Drink Menu", "Back to Order", 2, 2);
+        Menu drinkMenu("Drink Menu", "Back to Order", 6, 1);
         for (size_t i = 0; i < m_cntDrinks; ++i) {
             drinkMenu << (const char*)m_drinks[i];
         }
@@ -127,7 +127,7 @@ namespace seneca {
     }
 
     void Ordering::orderFood() {
-        Menu foodMenu("Food Menu", "Back to Order", 2, 2);
+        Menu foodMenu("Food Menu", "Back to Order", 6, 1);
         for (size_t i = 0; i < m_cntFoods; ++i) {
             foodMenu << (const char*)m_foods[i];
         }
