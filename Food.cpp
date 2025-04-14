@@ -61,11 +61,15 @@ namespace seneca {
         ostr << left << setw(28) << setfill('.') << (const char*)*this;
         ostr << (m_child ? "Child " : "Adult ");
         ostr << right << setw(6) << setfill(' ') << fixed << setprecision(2) << price();
-        if (m_customize && m_customize[0]) {
+
+        // Only add special instructions if printing to screen (std::cout)
+        if (&ostr == &std::cout && m_customize && m_customize[0]) {
             ostr << " >> " << m_customize;
         }
+
         return ostr;
     }
+
 
     bool Food::order() {
         // Ensure correct indentation for "Food Size Selection"
