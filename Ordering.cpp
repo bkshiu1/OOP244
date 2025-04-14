@@ -99,11 +99,13 @@ namespace seneca {
         cout << "List Of Avaiable Drinks" << endl;
         cout << "========================================" << endl;
         for (size_t i = 0; i < m_cntDrinks; ++i) {
-            cout << left << setw(36) << setfill('.') << (const char*)m_drinks[i];
-            cout << right << setw(7) << setfill(' ') << fixed << setprecision(2) << m_drinks[i].getBasePrice() << endl;
+            cout << left << setw(32) << setfill('.') << (const char*)m_drinks[i];
+            cout << right << setw(7) << setfill(' ') << fixed << setprecision(2)
+                << m_drinks[i].getBasePrice() << endl;
         }
         cout << "========================================" << endl;
     }
+
 
 
     void Ordering::orderDrink() {
