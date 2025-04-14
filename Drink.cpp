@@ -131,8 +131,8 @@ namespace seneca {
 
     Billable* Drink::clone() const {
         Drink* copy = new Drink();
-        copy->setName((const char*)(*this));             // uses operator const char*
-        copy->setPrice(getBasePrice());                  // use accessor, not direct member
+        copy->setName((const char*)(*this));       
+        copy->setPrice(getBasePrice());                 
         copy->m_size = m_size;
         copy->m_ordered = m_ordered;
         return copy;

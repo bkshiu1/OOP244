@@ -11,6 +11,7 @@
 // Date      Reason
 // 2025/04/13  Added getlineInput for safe <ENTER> handling
 // 2025/04/13  Implemented ms3 requirements
+// 2025/04/14  Refined input or formatting behavior for MS4
 // -----------------------------------------------------------
 // I have done all the coding by myself and only copied the code
 // that my professor provided to complete my workshops and assignments.
@@ -79,7 +80,6 @@ namespace seneca {
         }
     }
 
-    // Also add makeBillFileName if required for Milestone 4
     char* Utils::makeBillFileName(char* filename, size_t billNo) const {
         char temp[21] = "bill_";
         int idx = 5;

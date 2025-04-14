@@ -160,10 +160,6 @@ void Ordering::listDrinks() const {
         os << "========================================" << std::endl;
     }
 
-
-
-
-
     void Ordering::printBill(ostream& os) const {
         double total = 0.0;
         printBillTitle(os);

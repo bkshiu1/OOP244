@@ -62,7 +62,6 @@ namespace seneca {
         ostr << (m_child ? "Child " : "Adult ");
         ostr << right << setw(6) << setfill(' ') << fixed << setprecision(2) << price();
 
-        // Only add special instructions if printing to screen (std::cout)
         if (&ostr == &std::cout && m_customize && m_customize[0]) {
             ostr << " >> " << m_customize;
         }
@@ -72,7 +71,6 @@ namespace seneca {
 
 
     bool Food::order() {
-        // Ensure correct indentation for "Food Size Selection"
         Menu sizeMenu("Food Size Selection", "Back", 3, 3);
         sizeMenu << "Adult" << "Child";
 

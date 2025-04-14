@@ -11,6 +11,7 @@
 // Date      Reason
 // 2025/04/08  Completed Milestone 2 implementation
 // 2025/04/13  Implemented ms3 requirements
+// 2025/04/14  Updated for ms4 requirments
 // -----------------------------------------------------------
 ***********************************************************************/
 #ifndef SENECA_MENU_H

@@ -1,17 +1,19 @@
 /***********************************************************************
-// OOP244 Project, milestone 4 : tester program
+// OOP244 Project, MS4 Tester Source
 //
-// File	ms4.cpp
-// Version 1.0
-// Date 2024-11-20
-// Author Fardad
-// Description
-//
+// Final Project Milestone 4
+// Module: MS4 Main
+// Filename: ms4.cpp
+// Version 1.1
+// Author: Karl Shiu, 131531246, bkshiu1@myseneca.ca
 // Revision History
 // -----------------------------------------------------------
-// Name            Date            Reason
-//
-/////////////////////////////////////////////////////////////////
+// Date        Reason
+// 2025/04/14  Used to validate all MS4 functionality and output
+// -----------------------------------------------------------
+// I have done all the coding by myself and only copied the code
+// that my professor provided to complete my workshops and assignments.
+// -----------------------------------------------------------
 ***********************************************************************/
 #include <iostream>
 #include <fstream>

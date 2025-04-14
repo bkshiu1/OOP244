@@ -3,7 +3,7 @@
 //
 // Final Project Milestone 2
 // Module: Menu
-// Filename: Menu.cpp / Menu.h
+// Filename: Menu.cpp
 // Version 1.0
 // Author: Karl Shiu, 131531246, bkshiu1@myseneca.ca
 // Revision History
@@ -11,6 +11,7 @@
 // Date      Reason
 // 2025/04/08  Completed Milestone 2 implementation
 // 2025/04/13  Implemented ms3 requirements
+// 2025/04/14  Updated for ms4 requirments
 // -----------------------------------------------------------
 ***********************************************************************/
 #include "Menu.h"
