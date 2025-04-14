@@ -11,6 +11,7 @@
 // Date      Reason
 // 2025/04/08  Implemented interface for billable items
 // 2025/04/14  Updated for milestone 4
+// 2025/04/14  Fixed output formatting with setfill('.') in print()
 // -----------------------------------------------------------
 // I have done all the coding by myself and only copied the code
 // that my professor provided to complete my workshops and assignments.
@@ -51,7 +52,8 @@ namespace seneca {
     }
 
     std::ostream& Billable::print(std::ostream& ostr) const {
-        ostr << std::left << std::setw(30) << m_name << std::right << std::setw(7) << std::fixed << std::setprecision(2) << m_price;
+        ostr << std::left << std::setw(33) << std::setfill('.') << m_name;
+        ostr << std::right << std::setw(7) << std::setfill(' ') << std::fixed << std::setprecision(2) << m_price;
         return ostr;
     }
 
@@ -68,7 +70,7 @@ namespace seneca {
         m_price = price;
     }
 
-    double seneca::Billable::getBasePrice() const {
+    double Billable::getBasePrice() const {
         return m_price;
     }
 
