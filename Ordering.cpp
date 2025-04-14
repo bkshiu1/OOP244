@@ -88,10 +88,11 @@ namespace seneca {
         cout << "List Of Avaiable Meals" << endl;
         cout << "========================================" << endl;
         for (size_t i = 0; i < m_cntFoods; ++i) {
-            m_foods[i].print(cout) << endl;
+            m_foods[i].Billable::print(cout) << endl;
         }
         cout << "========================================" << endl;
     }
+
 
     void Ordering::listDrinks() const {
         cout << "List Of Avaiable Drinks" << endl;
