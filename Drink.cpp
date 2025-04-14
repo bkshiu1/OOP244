@@ -82,25 +82,19 @@ namespace seneca {
         int selection = sizeMenu.select();
 
         switch (selection) {
-        case 1:
-            m_size = 'S';
-            break;
-        case 2:
-            m_size = 'M';
-            break;
-        case 3:
-            m_size = 'L';
-            break;
-        case 4:
-            m_size = 'X';
-            break;
-        default:
-            m_size = 0;
+        case 1: m_size = 'S'; break;
+        case 2: m_size = 'M'; break;
+        case 3: m_size = 'L'; break;
+        case 4: m_size = 'X'; break;
+        default: m_size = 0;
         }
 
         m_ordered = (m_size != 0);
         return m_ordered;
     }
+
+
+
 
     bool Drink::ordered() const {
         return m_ordered;
@@ -126,21 +120,23 @@ namespace seneca {
         double base = getBasePrice();
 
         switch (m_size) {
-        case 'S':
-            return base * 0.75;
-        case 'M':
-            return base * 1.00;
-        case 'L':
-            return base * 1.50;
-        case 'X':
-            return base * 2.00;
-        default:
-            return 0.0;
+        case 'S': return base * 0.50;
+        case 'M': return base * 0.75;
+        case 'L': return base * 1.00;
+        case 'X': return base * 1.50;
+        default:  return 0.0;
         }
     }
 
+
     Billable* Drink::clone() const {
-        return new Drink(*this);
+        Drink* copy = new Drink();
+        copy->setName((const char*)(*this));             // uses operator const char*
+        copy->setPrice(getBasePrice());                  // use accessor, not direct member
+        copy->m_size = m_size;
+        copy->m_ordered = m_ordered;
+        return copy;
     }
+
 
 }
