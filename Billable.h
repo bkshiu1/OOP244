@@ -43,11 +43,12 @@ namespace seneca {
         virtual bool ordered() const = 0;
         virtual double price() const = 0;
         virtual Billable* clone() const = 0;
+        double getBasePrice() const;
 
     protected:
         void setName(const char* name);
         void setPrice(double price);
-        double getBasePrice() const;
+
 
 
     };
