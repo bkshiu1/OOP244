@@ -60,7 +60,7 @@ namespace seneca {
     ostream& Food::print(std::ostream& ostr) const {
         ostr << left << setw(28) << setfill('.') << (const char*)*this;
         ostr << (m_child ? "Child " : "Adult ");
-        ostr << right << setw(7) << setfill(' ') << fixed << setprecision(2) << price();
+        ostr << right << setw(6) << setfill(' ') << fixed << setprecision(2) << price();
         if (m_customize && m_customize[0]) {
             ostr << " >> " << m_customize;
         }
