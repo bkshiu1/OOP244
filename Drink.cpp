@@ -110,22 +110,34 @@ namespace seneca {
         std::string name;
         double price;
 
-        if (std::getline(file, name, ',') && file >> price) {
+        if (getline(file, name, ',') && file >> price) {
             file.ignore(1000, '\n');
-            setName(name.c_str());        // Make sure this is correctly implemented in Billable
-            setPrice(price);              // This stores the base price in m_price
+            setName(name.c_str());
+            setPrice(price);
             m_ordered = false;
             m_size = 0;
         }
         return file;
     }
 
-
     double Drink::price() const {
-        const double sizeFactors[] = { 0.0, 1.5, 2.0, 2.5, 3.0 };
-        return m_ordered ? getBasePrice() * sizeFactors[m_size] : 0.0;
-    }
+        if (!m_ordered) return 0.0;
 
+        double base = getBasePrice();
+
+        switch (m_size) {
+        case 'S':
+            return base * 0.75;
+        case 'M':
+            return base * 1.00;
+        case 'L':
+            return base * 1.50;
+        case 'X':
+            return base * 2.00;
+        default:
+            return 0.0;
+        }
+    }
 
     Billable* Drink::clone() const {
         return new Drink(*this);
