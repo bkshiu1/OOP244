@@ -78,7 +78,7 @@ namespace seneca {
 
     bool Drink::order() {
         Menu sizeMenu("Drink Size Selection", "Back", 3, 3);
-        sizeMenu << "Small" << "Medium" << "Large" << "Extra Large";
+        sizeMenu << "Small" << "Medium" << "Larg" << "Extra Large";
         int selection = sizeMenu.select();
 
         switch (selection) {
