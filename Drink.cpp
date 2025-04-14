@@ -31,9 +31,10 @@ using namespace std;
 
 namespace seneca {
 
-    Drink::Drink() : m_size(0), m_ordered(false) {}
+    Drink::Drink() : m_ordered(false), m_size(0) {}
 
-    Drink::Drink(const Drink& src) : Billable(src), m_size(src.m_size), m_ordered(src.m_ordered) {}
+    Drink::Drink(const Drink& src) : Billable(src), m_ordered(src.m_ordered), m_size(src.m_size) {}
+
 
     Drink& Drink::operator=(const Drink& src) {
         if (this != &src) {
