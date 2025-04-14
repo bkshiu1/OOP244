@@ -9,7 +9,7 @@
 // Revision History
 // -----------------------------------------------------------
 // Date      Reason
-// 2025/04/08  Created Billable module
+// 2025/04/08  Implemented Billable module logic
 // -----------------------------------------------------------
 // I have done all the coding by myself and only copied the code
 // that my professor provided to complete my workshops and assignments.
@@ -18,13 +18,12 @@
 #include "Billable.h"
 #include "Utils.h"
 #include <cstring>
-#include <iostream>
 
 using namespace std;
 
 namespace seneca {
 
-    Billable::Billable() : m_name(nullptr), m_price(0.0) {}
+    Billable::Billable() = default;
 
     Billable::Billable(const Billable& other) {
         *this = other;
@@ -32,9 +31,8 @@ namespace seneca {
 
     Billable& Billable::operator=(const Billable& other) {
         if (this != &other) {
-            delete[] m_name;
-            m_name = ut.alocpy(other.m_name);
-            m_price = other.m_price;
+            price(other.m_price);
+            name(other.m_name);
         }
         return *this;
     }
@@ -43,13 +41,13 @@ namespace seneca {
         delete[] m_name;
     }
 
-    void Billable::price(double value) {
-        m_price = value;
-    }
-
     void Billable::name(const char* name) {
         delete[] m_name;
         m_name = ut.alocpy(name);
+    }
+
+    void Billable::price(double value) {
+        m_price = value;
     }
 
     double Billable::price() const {
@@ -61,12 +59,14 @@ namespace seneca {
     }
 
     double operator+(double money, const Billable& B) {
-        if (B.ordered()) money += B.price();
-        return money;
+        return money + (B.ordered() ? B.price() : 0.0);
     }
 
     double& operator+=(double& money, const Billable& B) {
-        if (B.ordered()) money += B.price();
+        if (B.ordered()) {
+            money += B.price();
+        }
         return money;
     }
+
 }

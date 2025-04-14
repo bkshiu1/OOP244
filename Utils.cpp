@@ -1,7 +1,7 @@
 /***********************************************************************
 // OOP244 Project, Utils Module
 //
-// Final Project Milestone 2
+// Final Project Milestone 3
 // Module: Utils
 // Filename: Utils.cpp
 // Version 1.0
@@ -9,97 +9,73 @@
 // Revision History
 // -----------------------------------------------------------
 // Date      Reason
-// 2025/04/08  Completed Milestone 2 implementation
+// 2025/04/13  Added getlineInput for safe <ENTER> handling
 // -----------------------------------------------------------
 // I have done all the coding by myself and only copied the code
 // that my professor provided to complete my workshops and assignments.
 // -----------------------------------------------------------
 ***********************************************************************/
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
+#include <cstring>
 #include <limits>
+#include <cctype>  // for std::isspace
 #include "Utils.h"
+
+
+
 using namespace std;
 
 namespace seneca {
+
     Utils ut;
 
-    char* Utils::alocpy(const char* src) const {
-        char* des{};
-        return alocpy(des, src);
+    char* Utils::alocpy(const char* str) const {
+        if (!str) return nullptr;
+        char* copy = new char[strlen(str) + 1];
+        strcpy(copy, str);
+        return copy;
     }
 
-    char* Utils::alocpy(char*& des, const char* src) const {
-        delete[] des;
-        des = nullptr;
-        if (src) {
-            des = new char[strlen(src) + 1];
-            strcpy(des, src);
-        }
-        return des;
+    char* Utils::alocpy(char*& destination, const char* source) const {
+        delete[] destination;
+        return destination = alocpy(source);
     }
 
-    char* Utils::strcpy(char* des, const char* src) const {
-        int i;
-        for (i = 0; src[i]; i++) des[i] = src[i];
-        des[i] = char(0);
-        return des;
-    }
-
-    int Utils::strlen(const char* str) const {
-        int len;
-        for (len = 0; str[len]; len++);
-        return len;
-    }
-
-    bool Utils::isspace(char ch) const {
-        return ch == ' ' || ch == '\t' || ch == '\n' || ch == '\v' || ch == '\f' || ch == '\r';
-    }
-
-    bool Utils::isspace(const char* cstring) const {
-        while (cstring && isspace(*cstring)) {
-            cstring++;
-        }
-        return cstring && *cstring == 0;
-    }
-
-    int Utils::getInt() const {
+    int Utils::getInt(int min, int max) const {
         int value;
-        bool valid = false;
-        while (!valid) {
-            cin.clear();
-            cin >> ws;
-            if (cin.peek() == '\n') {
-                cout << "You must enter a value: ";
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            }
-            else if (!(cin >> value)) {
-                cout << "Invalid integer: ";
+        bool done = false;
+        while (!done) {
+            cin >> value;
+            if (cin.fail() || value < min || value > max) {
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            }
-            else if (cin.get() != '\n') {
-                cout << "Only an integer please: ";
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Invalid value, try again: ";
             }
             else {
-                valid = true;
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                done = true;
             }
         }
         return value;
     }
 
-    int Utils::getInt(int min, int max) const {
-        int val;
-        bool valid = false;
-        while (!valid) {
-            val = getInt();
-            if (val < min || val > max) {
-                cout << "Invalid value: [" << min << " <= value <= " << max << "], try again: ";
-            }
-            else {
-                valid = true;
-            }
+    bool Utils::isspace(const char* str) const {
+        if (str == nullptr) return true;
+        while (*str) {
+            if (!std::isspace(static_cast<unsigned char>(*str))) return false;
+            ++str;
         }
-        return val;
+        return true;
+    }
+
+
+    void Utils::getlineInput(char* buffer, int length) const {
+        cin.getline(buffer, length);
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            buffer[0] = '\0';
+        }
     }
 }

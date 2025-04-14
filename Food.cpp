@@ -9,7 +9,7 @@
 // Revision History
 // -----------------------------------------------------------
 // Date      Reason
-// 2025/04/08  Implemented Food module logic
+// 2025/04/13  Fixed special instruction <ENTER> input handling
 // -----------------------------------------------------------
 // I have done all the coding by myself and only copied the code
 // that my professor provided to complete my workshops and assignments.
@@ -22,6 +22,7 @@
 #include <iomanip>
 #include <cstring>
 #include <string>
+#include <iostream>
 
 using namespace std;
 
@@ -55,7 +56,6 @@ namespace seneca {
 
     ostream& Food::print(ostream& ostr) const {
         ostr << left << setw(28) << setfill('.') << (const char*)(*this);
-
         if (!ordered()) {
             ostr << ".....";
         }
@@ -69,20 +69,23 @@ namespace seneca {
             ostr << " >> ";
             for (int i = 0; m_customize[i] && i < 30; i++) ostr << m_customize[i];
         }
+
         return ostr;
     }
 
     bool Food::order() {
-        Menu sizeMenu("Food Size Selection", "Back", 2, 5);
+        Menu sizeMenu("Food Size Selection", "Back", 3, 3);
         sizeMenu << "Adult" << "Child";
         size_t selection = sizeMenu.select();
 
         if (selection == 1 || selection == 2) {
             m_child = (selection == 2);
             m_ordered = true;
+
             cout << "Special instructions\n> ";
             char buffer[1024]{};
-            cin.getline(buffer, 1024);  // FIX: Removed cin.ignore()
+            ut.getlineInput(buffer, 1024);
+
             delete[] m_customize;
             m_customize = (*buffer) ? ut.alocpy(buffer) : nullptr;
         }
@@ -92,6 +95,7 @@ namespace seneca {
             delete[] m_customize;
             m_customize = nullptr;
         }
+
         return m_ordered;
     }
 
@@ -112,11 +116,11 @@ namespace seneca {
             delete[] m_customize;
             m_customize = nullptr;
         }
+
         return file;
     }
 
     double Food::price() const {
         return (m_ordered && m_child) ? Billable::price() * 0.5 : Billable::price();
     }
-
-} // namespace seneca
+}

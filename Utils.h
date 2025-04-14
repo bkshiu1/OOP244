@@ -1,7 +1,7 @@
 /***********************************************************************
 // OOP244 Project, Utils Module
 //
-// Final Project Milestone 2
+// Final Project Milestone 3
 // Module: Utils
 // Filename: Utils.h
 // Version 1.0
@@ -9,7 +9,7 @@
 // Revision History
 // -----------------------------------------------------------
 // Date      Reason
-// 2025/04/08  Completed Milestone 2 implementation
+// 2025/04/13  Added getlineInput for robust blank line capture
 // -----------------------------------------------------------
 // I have done all the coding by myself and only copied the code
 // that my professor provided to complete my workshops and assignments.
@@ -21,17 +21,12 @@
 namespace seneca {
     class Utils {
     public:
-        char* alocpy(const char* src) const;
-        char* alocpy(char*& des, const char* src) const;
-        char* strcpy(char* des, const char* src) const;
-        int strlen(const char* str) const;
-        bool isspace(char ch) const;
-        bool isspace(const char* cstring) const;
-
-        int getInt() const;
+        char* alocpy(const char* str) const;
+        char* alocpy(char*& destination, const char* source) const;
         int getInt(int min, int max) const;
+        bool isspace(const char* str) const;
+        void getlineInput(char* buffer, int length) const;
     };
-
     extern Utils ut;
 }
-#endif // !SENECA_UTILS_H
+#endif

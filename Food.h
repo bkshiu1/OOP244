@@ -9,18 +9,15 @@
 // Revision History
 // -----------------------------------------------------------
 // Date      Reason
-// 2025/04/08  Created Food module
+// 2025/04/08  Implemented Food module logic
 // -----------------------------------------------------------
 // I have done all the coding by myself and only copied the code
 // that my professor provided to complete my workshops and assignments.
 // -----------------------------------------------------------
 ***********************************************************************/
-
 #ifndef SENECA_FOOD_H
 #define SENECA_FOOD_H
 
-#include <iostream>
-#include <fstream>
 #include "Billable.h"
 
 namespace seneca {
@@ -43,6 +40,6 @@ namespace seneca {
         double price() const override;
     };
 
-} // namespace seneca
+}
 
-#endif // SENECA_FOOD_H
+#endif

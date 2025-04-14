@@ -16,12 +16,14 @@
 #include "Drink.h"
 #include "Food.h"
 #include "Billable.h"
+
 using namespace seneca;
 using namespace std;
 
 void DrinkTester();
 void FoodTester();
 void dumpFile(const char* fn);
+
 int main() {
    cout << "Testing Drink Class=============================" << endl;
    DrinkTester();
@@ -38,6 +40,7 @@ void print(Drink D) {
 void print(Food F) {
    F.print() << endl;
 }
+
 void virtuals(Billable& B, ifstream& file, ofstream& outfile) {
    cout << endl << "Checking Virtuals: " << endl;
    while (file) {
@@ -109,6 +112,7 @@ void DrinkTester() {
       cout << "drinks.csv is missing!" << endl;
    }
 }
+
 void FoodTester() {
    cout << "Food Tester!" << endl;
    Food F1, F2;

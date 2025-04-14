@@ -9,13 +9,12 @@
 // Revision History
 // -----------------------------------------------------------
 // Date      Reason
-// 2025/04/08  Created Drink header
+// 2025/04/08  Implemented Drink module logic
 // -----------------------------------------------------------
 // I have done all the coding by myself and only copied the code
 // that my professor provided to complete my workshops and assignments.
 // -----------------------------------------------------------
 ***********************************************************************/
-
 #ifndef SENECA_DRINK_H
 #define SENECA_DRINK_H
 

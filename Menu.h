@@ -11,9 +11,6 @@
 // Date      Reason
 // 2025/04/08  Completed Milestone 2 implementation
 // -----------------------------------------------------------
-// I have done all the coding by myself and only copied the code
-// that my professor provided to complete my workshops and assignments.
-// -----------------------------------------------------------
 ***********************************************************************/
 #ifndef SENECA_MENU_H
 #define SENECA_MENU_H
@@ -36,8 +33,8 @@ namespace seneca {
         MenuItem(const char* content, unsigned indent, unsigned indentSZ, int rowNumber);
         ~MenuItem();
 
-        MenuItem(const MenuItem& other) = delete;
-        MenuItem& operator=(const MenuItem& other) = delete;
+        MenuItem(const MenuItem&) = delete;
+        MenuItem& operator=(const MenuItem&) = delete;
 
         operator bool() const;
         std::ostream& display() const;
@@ -65,8 +62,6 @@ namespace seneca {
 
         Menu& operator<<(const char* menuItemContent);
         size_t select() const;
-        size_t run() const;
-        void displayOnly() const;
 
         friend size_t operator<<(std::ostream& ostr, const Menu& m);
     };

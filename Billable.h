@@ -9,13 +9,12 @@
 // Revision History
 // -----------------------------------------------------------
 // Date      Reason
-// 2025/04/08  Created Billable module
+// 2025/04/08  Implemented Billable module logic
 // -----------------------------------------------------------
 // I have done all the coding by myself and only copied the code
 // that my professor provided to complete my workshops and assignments.
 // -----------------------------------------------------------
 ***********************************************************************/
-
 #ifndef SENECA_BILLABLE_H
 #define SENECA_BILLABLE_H
 
@@ -27,13 +26,15 @@ namespace seneca {
     class Billable {
         char* m_name{};
         double m_price{};
+
     protected:
         void name(const char* name);
         void price(double value);
+
     public:
         Billable();
-        Billable(const Billable& src);
-        Billable& operator=(const Billable& src);
+        Billable(const Billable& other);
+        Billable& operator=(const Billable& other);
         virtual ~Billable();
 
         virtual double price() const;
@@ -41,13 +42,12 @@ namespace seneca {
         virtual bool order() = 0;
         virtual bool ordered() const = 0;
         virtual std::ifstream& read(std::ifstream& file) = 0;
-
         operator const char* () const;
+
+        friend double operator+(double money, const Billable& B);
+        friend double& operator+=(double& money, const Billable& B);
     };
 
-    double operator+(double money, const Billable& B);
-    double& operator+=(double& money, const Billable& B);
+}
 
-} // namespace seneca
-
-#endif // SENECA_BILLABLE_H
+#endif
