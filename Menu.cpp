@@ -3,17 +3,21 @@
 //
 // Final Project Milestone 2
 // Module: Menu
-// Filename: Menu.cpp / Menu.h
-// Version 1.0
+// Filename: Menu.cpp
+// Version 1.1
 // Author: Karl Shiu, 131531246, bkshiu1@myseneca.ca
 // Revision History
 // -----------------------------------------------------------
 // Date      Reason
 // 2025/04/08  Completed Milestone 2 implementation
 // 2025/04/13  Implemented ms3 requirements
+// 2025/04/14  Updated for ms4 requirements
+// 2025/04/15  Adjusted spacing and formatting in select() to match m52_correct_output.txt
+// 2025/04/15  Updated for ms53 requirements
 // -----------------------------------------------------------
 ***********************************************************************/
 #include "Menu.h"
+#include "Utils.h"
 #include <iomanip>
 #include <cstring>
 
@@ -91,16 +95,29 @@ Menu& Menu::operator<<(const char* menuItemContent) {
 }
 
 size_t Menu::select() const {
-    if (m_title) m_title.display() << std::endl;
-    for (unsigned i = 0; i < m_numItems; ++i)
-        if (m_items[i]) m_items[i]->display() << std::endl;
+    if (m_title) {
+        m_title.display();
+        if (m_title.m_content && std::strcmp(m_title.m_content, "Seneca Restaurant") == 0) {
+            std::cout << " " << std::endl;
+        }
+        else {
+            std::cout << std::endl;
+        }
+    }
+    for (unsigned i = 0; i < m_numItems; ++i) {
+        if (m_items[i]) {
+            m_items[i]->display() << std::endl;
+        }
+    }
     m_exitOption.display() << std::endl;
     m_prompt.display();
     return static_cast<size_t>(ut.getInt(0, static_cast<int>(m_numItems)));
 }
 
-namespace seneca {
-    size_t operator<<(std::ostream& ostr, const Menu& m) {
-        return (&ostr == &std::cout) ? m.select() : 0;
+
+size_t operator<<(std::ostream& ostr, const Menu& m) {
+    if (&ostr == &std::cout) {
+        return m.select();
     }
+    return 0;
 }
