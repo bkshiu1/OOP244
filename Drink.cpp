@@ -114,10 +114,6 @@ namespace seneca {
         return m_ordered;
     }
 
-
-
-
-
     bool Drink::ordered() const {
         return m_ordered;
     }
