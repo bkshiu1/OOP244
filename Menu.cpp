@@ -97,19 +97,17 @@ size_t Menu::select() const {
     if (m_title) {
         m_title.display();
         if (m_title.m_content && std::strcmp(m_title.m_content, "Seneca Restaurant") == 0) {
-            std::cout << " " << std::endl;  // Special case for Seneca Restaurant
+            std::cout << " " << std::endl;
         }
         else {
-            std::cout << std::endl;         // All other titles get clean newline
+            std::cout << std::endl;
         }
     }
-
     for (unsigned i = 0; i < m_numItems; ++i) {
         if (m_items[i]) {
             m_items[i]->display() << std::endl;
         }
     }
-
     m_exitOption.display() << std::endl;
     m_prompt.display();
     return static_cast<size_t>(ut.getInt(0, static_cast<int>(m_numItems)));
