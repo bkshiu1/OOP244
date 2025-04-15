@@ -56,11 +56,12 @@ std::ostream& MenuItem::display() const {
             int indent = m_indent * m_indentSZ;
             if (m_rowNumber < 10 || m_rowNumber == 0) indent += 1;
             std::cout << std::string(indent, ' ') << m_rowNumber << "- ";
+            std::cout << m_content;
         }
-        else if (m_indent > 0 && m_indentSZ > 0) {
-            std::cout << std::string(m_indent * m_indentSZ, ' ');
+        else {
+            // Title line: no indentation at all
+            std::cout << m_content;
         }
-        std::cout << m_content;
     }
     else {
         std::cout << "??????????";
