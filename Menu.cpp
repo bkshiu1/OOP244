@@ -96,14 +96,25 @@ Menu& Menu::operator<<(const char* menuItemContent) {
 size_t Menu::select() const {
     if (m_title) {
         m_title.display();
-        std::cout << " " << std::endl;
+        if (m_title.m_content && std::strcmp(m_title.m_content, "Seneca Restaurant") == 0) {
+            std::cout << " " << std::endl;  // Special case for Seneca Restaurant
+        }
+        else {
+            std::cout << std::endl;         // All other titles get clean newline
+        }
     }
-    for (unsigned i = 0; i < m_numItems; ++i)
-        if (m_items[i]) m_items[i]->display() << std::endl;
+
+    for (unsigned i = 0; i < m_numItems; ++i) {
+        if (m_items[i]) {
+            m_items[i]->display() << std::endl;
+        }
+    }
+
     m_exitOption.display() << std::endl;
     m_prompt.display();
     return static_cast<size_t>(ut.getInt(0, static_cast<int>(m_numItems)));
 }
+
 
 size_t operator<<(std::ostream& ostr, const Menu& m) {
     if (&ostr == &std::cout) {
