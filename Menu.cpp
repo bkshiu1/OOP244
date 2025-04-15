@@ -59,8 +59,7 @@ std::ostream& MenuItem::display() const {
             std::cout << std::string(indent, ' ') << m_rowNumber << "- ";
         }
         else {
-            std::cout << std::string(m_indent * m_indentSZ, ' ') << m_content << std::endl;
-            return std::cout; // Ensure newline after title
+            std::cout << std::string(m_indent * m_indentSZ, ' ');
         }
         std::cout << m_content;
     }
@@ -69,7 +68,6 @@ std::ostream& MenuItem::display() const {
     }
     return std::cout;
 }
-
 
 Menu::Menu(const char* title, const char* exitOption, unsigned indent, unsigned indentSZ)
     : m_indent(indent), m_indentSZ(indentSZ), m_numItems(0),
@@ -98,7 +96,7 @@ Menu& Menu::operator<<(const char* menuItemContent) {
 size_t Menu::select() const {
     if (m_title) {
         m_title.display();
-        std::cout << std::endl;
+        std::cout << " " << std::endl;
     }
     for (unsigned i = 0; i < m_numItems; ++i)
         if (m_items[i]) m_items[i]->display() << std::endl;
