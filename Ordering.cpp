@@ -10,6 +10,7 @@
 // -----------------------------------------------------------
 // Date      Reason
 // 2025/04/14  Initial implementation for Milestone 4
+// 2025/04/15  fix printTotal() indentation issue
 // -----------------------------------------------------------
 // I have done all the coding by myself and only copied the code
 // that my professor provided to complete my workshops and assignments.
@@ -154,9 +155,9 @@ void Ordering::listDrinks() const {
         double tax = total * Tax;
         double totalWithTax = total + tax;
 
-        os << "                     Total:" << "        " << total << std::endl;
+        os << "                     Total:" << "         " << total << std::endl;
         os << "                     Tax:" << "           " << tax << std::endl;
-        os << "                     Total+Tax:" << "    " << totalWithTax << std::endl;
+        os << "                     Total+Tax:" << "     " << totalWithTax << std::endl;
         os << "========================================" << std::endl;
     }
 
