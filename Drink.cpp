@@ -77,42 +77,24 @@ namespace seneca {
     }
 
     bool Drink::order() {
-        Menu sizeMenu("Drink Size Selection", "Back", 3, 3);  // 9 spaces indent
+        Menu sizeMenu("Drink Size Selection", "Back", 3, 3);
         sizeMenu << "Small" << "Medium" << "Larg" << "Extra Large";
         int selection = sizeMenu.select();
 
         switch (selection) {
-        case 1:
-            m_size = 'S';
-            break;
-        case 2:
-            m_size = 'M';
-            break;
-        case 3:
-            m_size = 'L';
-            break;
-        case 4:
-            m_size = 'X';
-            break;
-        default:
-            m_size = 0;
+        case 1: m_size = 'S'; break;
+        case 2: m_size = 'M'; break;
+        case 3: m_size = 'L'; break;
+        case 4: m_size = 'X'; break;
+        default: m_size = 0;
         }
 
         m_ordered = (m_size != 0);
-
-        if (m_ordered) {
-            double base = getBasePrice();
-            switch (m_size) {
-            case 'S': setPrice(base * 0.50); break;
-            case 'M': setPrice(base * 0.75); break;
-            case 'L': setPrice(base * 1.00); break;
-            case 'X': setPrice(base * 1.50); break;
-            default:  setPrice(0.0); break;
-            }
-        }
-
         return m_ordered;
     }
+
+
+
 
     bool Drink::ordered() const {
         return m_ordered;
@@ -149,8 +131,8 @@ namespace seneca {
 
     Billable* Drink::clone() const {
         Drink* copy = new Drink();
-        copy->setName((const char*)(*this));       
-        copy->setPrice(getBasePrice());                 
+        copy->setName((const char*)(*this));
+        copy->setPrice(getBasePrice());
         copy->m_size = m_size;
         copy->m_ordered = m_ordered;
         return copy;
