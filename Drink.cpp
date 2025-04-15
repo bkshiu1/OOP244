@@ -13,6 +13,7 @@
 // 2025/04/13  Implemented ms3 requirements
 // 2025/04/14  Updated for ms4: added clone(), fixed display
 // 2025/04/15  Updated for ms54 requirements
+// 2025/04/15  Fixed size print issue
 // -----------------------------------------------------------
 // I have done all the coding by myself and only copied the code
 // that my professor provided to complete my workshops and assignments.
@@ -60,7 +61,7 @@ namespace seneca {
                 os << "SML..";
                 break;
             case 'M':
-                os << "MED..";
+                os << "MID..";
                 break;
             case 'L':
                 os << "LRG..";
