@@ -4,15 +4,15 @@
 // Final Project Milestone 2
 // Module: Menu
 // Filename: Menu.cpp
-// Version 1.0
+// Version 1.1
 // Author: Karl Shiu, 131531246, bkshiu1@myseneca.ca
 // Revision History
 // -----------------------------------------------------------
 // Date      Reason
 // 2025/04/08  Completed Milestone 2 implementation
 // 2025/04/13  Implemented ms3 requirements
-// 2025/04/14  Updated for ms4 requirments
-// 2025/04/15  Updated function select() to ms51 requirments
+// 2025/04/14  Updated for ms4 requirements
+// 2025/04/15  Adjusted spacing and formatting in select() to match m52_correct_output.txt
 // -----------------------------------------------------------
 ***********************************************************************/
 #include "Menu.h"
