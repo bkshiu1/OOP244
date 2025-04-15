@@ -1,7 +1,7 @@
 /***********************************************************************
 // OOP244 Project, Constants Header
 //
-// Final Project Milestone 4
+// Final Project Milestone 5 part 4
 // Module: Constants
 // Filename: constants.h
 // Version 1.1

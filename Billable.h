@@ -1,7 +1,7 @@
 /***********************************************************************
 // OOP244 Project, Billable Module
 //
-// Final Project Milestone 4
+// Final Project Milestone 5 part 4
 // Module: Billable
 // Filename: Billable.h
 // Version 1.0
