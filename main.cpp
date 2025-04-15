@@ -1,7 +1,7 @@
 /***********************************************************************
 // OOP244 Project, Milestone 5
 //
-// Final Project Milestone 5 - Part 2
+// Final Project Milestone 5 - Part 5
 // Module: main
 // Filename: main.cpp
 // Version 1.1
@@ -10,7 +10,7 @@
 // -----------------------------------------------------------
 // Date      Reason
 // 2025/04/15  Implemented drink ordering loop and submenu flow (MS52)
-// 2025/04/15  Fixed indentation problem for ms52
+// 2025/04/15  Fixed indentation problem for ms52, adjusted to typos in part 5 correct_output.txt
 // -----------------------------------------------------------
 // I have done all the coding by myself and only copied the code
 // that my professor provided to complete my workshops and assignments.
@@ -74,7 +74,7 @@ int main() {
             break;
         case 0:
             if (ordering.hasUnsavedBill()) {
-                Menu confirm("You have bills that are not saved, are you sue you want to exit?", "No", 0, 0);
+                Menu confirm("You have bills that are not saved, Are you sure you want to exit?", "No", 0, 0);
                 confirm << "Yes";
                 if (confirm.select() == 1) {
                     exit = true;

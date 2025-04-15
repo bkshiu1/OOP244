@@ -1,7 +1,7 @@
 /***********************************************************************
 // OOP244 Project, Ordering Module
 //
-// Final Project Milestone 5 part 4
+// Final Project Milestone 5 part 5
 // Module: Ordering
 // Filename: Ordering.cpp
 // Version 1.0

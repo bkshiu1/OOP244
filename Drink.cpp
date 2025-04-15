@@ -1,7 +1,7 @@
 /***********************************************************************
 // OOP244 Project, Drink Module
 //
-// Final Project Milestone 5 part 4
+// Final Project Milestone 5 part 5
 // Module: Drink
 // Filename: Drink.cpp
 // Version 1.1
@@ -13,7 +13,7 @@
 // 2025/04/13  Implemented ms3 requirements
 // 2025/04/14  Updated for ms4: added clone(), fixed display
 // 2025/04/15  Updated for ms54 requirements
-// 2025/04/15  Fixed size print issue
+// 2025/04/15  Fixed size print issue for ms55
 // -----------------------------------------------------------
 // I have done all the coding by myself and only copied the code
 // that my professor provided to complete my workshops and assignments.
