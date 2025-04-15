@@ -12,6 +12,7 @@
 // 2025/04/13  Added getlineInput for safe <ENTER> handling
 // 2025/04/13  Implemented ms3 requirements
 // 2025/04/14  Refined input or formatting behavior for MS4
+// 2025/04/15  Updated function getInt() for ms56 requirements
 // -----------------------------------------------------------
 // I have done all the coding by myself and only copied the code
 // that my professor provided to complete my workshops and assignments.
@@ -23,6 +24,9 @@
 #include <cstring>
 #include <iostream>
 #include <limits>
+#include <sstream>
+#include <string>
+
 using namespace std;
 
 namespace seneca {
@@ -40,25 +44,40 @@ namespace seneca {
         return destination = alocpy(source);
     }
 
-    int Utils::getInt(int min, int max) const {
+    int Utils::getInt(int min, int max) const{
         int value;
         bool done = false;
-        while (!done) {
-            cin >> value;
-            if (cin.fail() || value < min || value > max) {
-                cin.clear();
-                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        char next;
 
-                cout << "Invalid value, try again: ";
+        while (!done) {
+            std::string line;
+            std::getline(std::cin, line);
+
+            if (line.empty()) {
+                std::cout << "You must enter a value: ";
+                continue;
+            }
+
+            std::istringstream input(line);
+            if (!(input >> value)) {
+                std::cout << "Invalid integer: ";
+            }
+            else if (input >> next) {
+                std::cout << "Only an integer please: ";
+            }
+            else if (value < min || value > max) {
+                std::cout << "Invalid value: [" << min << "<= value <=" << max << "], try again: ";
             }
             else {
-                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
                 done = true;
             }
+
+            if (!done) std::cout.flush();
         }
+
         return value;
     }
+
 
     bool Utils::isspace(const char* str) const {
         if (str == nullptr) return true;
