@@ -33,7 +33,7 @@ int main() {
     }
     bool exit = false;
     while (!exit) {
-        Menu mainMenu("Seneca Restaurant", "End Program", 1, 2);
+        Menu mainMenu("Seneca Restaurant", "End Program", 0, 0);
         mainMenu << "Order" << "Print Bill" << "Start a New Bill" << "List Foods" << "List Drinks";
         size_t mainSel = mainMenu.select();
 
