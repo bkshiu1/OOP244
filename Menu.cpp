@@ -35,24 +35,12 @@ MenuItem::MenuItem(const char* content, unsigned indent, unsigned indentSZ, int 
         setEmpty();
     }
     else {
-        // Trim leading spaces
         while (*content && ut.isspace(content)) {
             content++;
         }
-
-        // Copy and trim trailing spaces
-        const char* end = content + strlen(content);
-        while (end > content && ut.isspace(*(end - 1))) {
-            --end;
-        }
-
-        size_t len = end - content;
-        m_content = new char[len + 1];
-        strncpy(m_content, content, len);
-        m_content[len] = '\0';
+        m_content = ut.alocpy(content);
     }
 }
-
 
 MenuItem::~MenuItem() {
     delete[] m_content;
