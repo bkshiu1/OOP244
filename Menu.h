@@ -1,7 +1,7 @@
 /***********************************************************************
 // OOP244 Project, Menu Module
 //
-// Final Project Milestone 5 part 5
+// Final Project Milestone 5 part 6
 // Module: Menu
 // Filename: Menu.cpp / Menu.h
 // Version 1.0

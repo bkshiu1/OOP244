@@ -1,7 +1,7 @@
 /***********************************************************************
 // OOP244 Project, Drink Module
 //
-// Final Project Milestone 5 part 5
+// Final Project Milestone 5 part 6
 // Module: Drink
 // Filename: Drink.h
 // Version 1.1

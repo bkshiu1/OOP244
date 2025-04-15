@@ -1,7 +1,7 @@
 /***********************************************************************
 // OOP244 Project, Ordering Module
 //
-// Final Project Milestone 5 part 5
+// Final Project Milestone 5 part 6
 // Module: Ordering
 // Filename: Ordering.h
 // Version 1.0
