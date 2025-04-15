@@ -95,7 +95,10 @@ Menu& Menu::operator<<(const char* menuItemContent) {
 }
 
 size_t Menu::select() const {
-    if (m_title) m_title.display();
+    if (m_title) {
+        m_title.display();
+        std::cout << std::endl;
+    }
     for (unsigned i = 0; i < m_numItems; ++i)
         if (m_items[i]) m_items[i]->display() << std::endl;
     m_exitOption.display() << std::endl;
