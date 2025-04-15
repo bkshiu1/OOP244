@@ -1,41 +1,38 @@
 /***********************************************************************
 // OOP244 Project, Food Module
 //
-// Final Project Milestone 4
+// Final Project Milestone 3
 // Module: Food
 // Filename: Food.cpp
-// Version 1.1
+// Version 1.0
 // Author: Karl Shiu, 131531246, bkshiu1@myseneca.ca
 // Revision History
 // -----------------------------------------------------------
 // Date      Reason
-// 2025/04/08  Implemented Food module logic
+// 2025/04/13  Fixed special instruction <ENTER> input handling, incorrect indentation
 // 2025/04/13  Implemented ms3 requirements
-// 2025/04/14  Updated for ms4: added clone()
 // -----------------------------------------------------------
 // I have done all the coding by myself and only copied the code
 // that my professor provided to complete my workshops and assignments.
 // -----------------------------------------------------------
 ***********************************************************************/
-#define _CRT_SECURE_NO_WARNINGS
-#include <iostream>
+
+#include "Food.h"
+#include "Utils.h"
+#include "Menu.h"
 #include <iomanip>
 #include <cstring>
 #include <string>
-#include "Food.h"
-#include "Menu.h"
+#include <iostream>
 
 using namespace std;
 
 namespace seneca {
 
-    Food::Food() : m_ordered(false), m_child(false), m_customize(nullptr) {}
+    Food::Food() = default;
 
-    Food::Food(const Food& src) : Billable(src), m_ordered(src.m_ordered), m_child(src.m_child), m_customize(nullptr) {
-        if (src.m_customize) {
-            m_customize = new char[strlen(src.m_customize) + 1];
-            strcpy(m_customize, src.m_customize);
-        }
+    Food::Food(const Food& src) {
+        *this = src;
     }
 
     Food& Food::operator=(const Food& src) {
@@ -44,10 +41,11 @@ namespace seneca {
             m_ordered = src.m_ordered;
             m_child = src.m_child;
             delete[] m_customize;
-            m_customize = nullptr;
             if (src.m_customize) {
-                m_customize = new char[strlen(src.m_customize) + 1];
-                strcpy(m_customize, src.m_customize);
+                m_customize = ut.alocpy(src.m_customize);
+            }
+            else {
+                m_customize = nullptr;
             }
         }
         return *this;
@@ -57,44 +55,50 @@ namespace seneca {
         delete[] m_customize;
     }
 
-    ostream& Food::print(std::ostream& ostr) const {
-        ostr << left << setw(28) << setfill('.') << (const char*)*this;
-        ostr << (m_child ? "Child " : "Adult ");
-        ostr << right << setw(6) << setfill(' ') << fixed << setprecision(2) << price();
+    ostream& Food::print(ostream& ostr) const {
+        ostr << left << setw(28) << setfill('.') << (const char*)(*this);
+        if (!ordered()) {
+            ostr << ".....";
+        }
+        else {
+            ostr << (m_child ? "Child" : "Adult");
+        }
 
-        if (&ostr == &std::cout && m_customize && m_customize[0]) {
-            ostr << " >> " << m_customize;
+        ostr << right << setw(7) << setfill(' ') << fixed << setprecision(2) << price();
+
+        if (ostr.rdbuf() == cout.rdbuf() && m_customize && *m_customize) {
+            ostr << " >> ";
+            for (int i = 0; m_customize[i] && i < 30; i++) ostr << m_customize[i];
         }
 
         return ostr;
     }
 
-
     bool Food::order() {
         Menu sizeMenu("Food Size Selection", "Back", 3, 3);
         sizeMenu << "Adult" << "Child";
+        size_t selection = sizeMenu.select();
 
-        int sel = sizeMenu.select();
-
-        if (sel == 1 || sel == 2) {
-            m_child = (sel == 2);
-            cout << "Special instructions\n> ";
-            string input;
-            getline(cin >> ws, input);
-            delete[] m_customize;
-            m_customize = nullptr;
-            if (!input.empty()) {
-                m_customize = new char[input.length() + 1];
-                strcpy(m_customize, input.c_str());
-            }
+        if (selection == 1 || selection == 2) {
+            m_child = (selection == 2);
             m_ordered = true;
+
+            cout << "Special instructions\n> ";
+            char buffer[1024]{};
+            ut.getlineInput(buffer, 1024);
+
+            delete[] m_customize;
+            m_customize = (*buffer) ? ut.alocpy(buffer) : nullptr;
         }
         else {
             m_ordered = false;
+            m_child = false;
+            delete[] m_customize;
+            m_customize = nullptr;
         }
+
         return m_ordered;
     }
-
 
     bool Food::ordered() const {
         return m_ordered;
@@ -102,26 +106,22 @@ namespace seneca {
 
     ifstream& Food::read(ifstream& file) {
         string name;
-        double price;
+        double pr = 0.0;
 
-        if (getline(file, name, ',') && file >> price) {
+        if (getline(file, name, ',') && file >> pr) {
             file.ignore(1000, '\n');
-            this->setName(name.c_str());
-            setPrice(price);
-            m_ordered = false;
+            this->name(name.c_str());
+            this->Billable::price(pr);
             m_child = false;
+            m_ordered = false;
             delete[] m_customize;
             m_customize = nullptr;
         }
+
         return file;
     }
 
     double Food::price() const {
-        return m_child ? getBasePrice() / 2.0 : getBasePrice();
+        return (m_ordered && m_child) ? Billable::price() * 0.5 : Billable::price();
     }
-
-    Billable* Food::clone() const {
-        return new Food(*this);
-    }
-
 }
