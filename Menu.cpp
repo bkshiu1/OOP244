@@ -12,6 +12,7 @@
 // 2025/04/08  Completed Milestone 2 implementation
 // 2025/04/13  Implemented ms3 requirements
 // 2025/04/14  Updated for ms4 requirments
+// 2025/04/15  Updated function select() to ms51 requirments
 // -----------------------------------------------------------
 ***********************************************************************/
 #include "Menu.h"
@@ -68,8 +69,6 @@ std::ostream& MenuItem::display() const {
     return std::cout;
 }
 
-
-
 Menu::Menu(const char* title, const char* exitOption, unsigned indent, unsigned indentSZ)
     : m_indent(indent), m_indentSZ(indentSZ), m_numItems(0),
     m_title(title, indent, indentSZ, -1),
@@ -105,7 +104,6 @@ size_t Menu::select() const {
     m_prompt.display();
     return static_cast<size_t>(ut.getInt(0, static_cast<int>(m_numItems)));
 }
-
 
 size_t operator<<(std::ostream& ostr, const Menu& m) {
     if (&ostr == &std::cout) {
