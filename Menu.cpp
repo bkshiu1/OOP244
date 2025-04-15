@@ -56,18 +56,18 @@ std::ostream& MenuItem::display() const {
             int indent = m_indent * m_indentSZ;
             if (m_rowNumber < 10 || m_rowNumber == 0) indent += 1;
             std::cout << std::string(indent, ' ') << m_rowNumber << "- ";
-            std::cout << m_content;
         }
         else {
-            // Title line: no indentation at all
-            std::cout << m_content;
+            std::cout << std::string(m_indent * m_indentSZ, ' ');
         }
+        std::cout << m_content;
     }
     else {
         std::cout << "??????????";
     }
     return std::cout;
 }
+
 
 
 Menu::Menu(const char* title, const char* exitOption, unsigned indent, unsigned indentSZ)
@@ -97,7 +97,7 @@ Menu& Menu::operator<<(const char* menuItemContent) {
 size_t Menu::select() const {
     if (m_title) {
         m_title.display();
-        std::cout << std::endl;
+        std::cout << " " << std::endl;
     }
     for (unsigned i = 0; i < m_numItems; ++i)
         if (m_items[i]) m_items[i]->display() << std::endl;
@@ -105,6 +105,7 @@ size_t Menu::select() const {
     m_prompt.display();
     return static_cast<size_t>(ut.getInt(0, static_cast<int>(m_numItems)));
 }
+
 
 size_t operator<<(std::ostream& ostr, const Menu& m) {
     if (&ostr == &std::cout) {
