@@ -74,7 +74,7 @@ int main() {
             break;
         case 0:
             if (ordering.hasUnsavedBill()) {
-                Menu confirm("You have bills that are not saved. Are you sure you want to exit?", "No", 1, 1);
+                Menu confirm("You have bills that are not saved. Are you sure you want to exit?", "No", 0, 0);
                 confirm << "Yes";
                 if (confirm.select() == 1) {
                     exit = true;
